@@ -1,0 +1,42 @@
+version: '3.3'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: "ons-mysql"
+    environment:
+      POSTGRES_ROOT_PASSWORD: "UKFZoaJh!Pddx9TP.UUV"
+      POSTGRES_DATABASE: "ons"
+      POSTGRES_USER: "ons"
+      POSTGRES_PASSWORD: "fqdeZRkKRLhWpcLB9y9D"
+    volumes:
+      - type: bind
+        target: /var/lib/postgresql/data
+        source: /mnt/cache/appdata/ons/postgres
+    networks:
+      ons:
+        ipv4_address: 10.10.13.10
+        
+  backend:
+    image: noebuerki/ons-backend:latest
+    container_name: "ons-backend"
+    ports:
+      - "8041:8000"
+    depends_on:
+      - mysql
+    networks:
+      ons:
+        ipv4_address: 10.10.13.11
+
+  webapp:
+    image: noebuerki/ons-webapp:latest
+    container_name: "ons-webapp"
+    ports:
+      - "8040:80"
+
+networks:
+  ons:
+    ipam:
+      driver: default
+      config:
+        - subnet: "10.10.13.0/24"
