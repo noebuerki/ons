@@ -25,4 +25,4 @@ RUN npm run build
 
 # Create Nginx image
 FROM nginx:1.25-alpine
-COPY --from=build $DockerHome/public /usr/share/nginx/html
+COPY --from=build $DockerHome/build /usr/share/nginx/html
