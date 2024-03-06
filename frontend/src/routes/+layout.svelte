@@ -1,20 +1,10 @@
 <script>
-    import { NavBrand, NavHamburger, NavLi, NavUl, Navbar } from "flowbite-svelte";
+    import Header from "$lib/Header.svelte";
     import "../app.pcss";
 </script>
 <div class="h-screen grid my-body">
-    <Navbar let:NavContainer color="primary">
-        <NavContainer class="border px-5 py-2 rounded-lg bg-white dark:bg-gray-600">
-            <NavBrand href="/">
-                <span class="self-center whitespace-nowrap text-xl font-semibold">Flowbite</span>
-            </NavBrand>
-            <NavHamburger />
-            <NavUl>
-                <NavLi href="/">Home</NavLi>
-                <NavLi href="/about">About</NavLi>
-            </NavUl>
-        </NavContainer>
-    </Navbar>
+    <Header>
+    </Header>
     <main class="w-full h-full">
         <slot></slot>
     </main>

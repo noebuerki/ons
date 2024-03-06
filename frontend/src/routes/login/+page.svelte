@@ -19,7 +19,7 @@
             <Button type="submit" class="w-full">Login</Button>
         </form>
         <P class="mt-6 text-center">
-            Don't have an account? <A href="/register" class="btn btn-primary">Register</A>
+            Don't have an account? <A href="/register">Register</A>
         </P>
     </Card>
 </div>
