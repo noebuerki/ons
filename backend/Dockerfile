@@ -21,7 +21,7 @@ RUN pip install --upgrade pip
 COPY . $DockerHome
 
 # Install all dependencies
-RUN pip install -r requirements.txt
+RUN pip install -r requirements/requirements.txt
 
 # Port where the Django app runs
 EXPOSE 8000
