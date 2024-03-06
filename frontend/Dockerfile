@@ -1,14 +1,11 @@
-# Set workdir variable
-ENV DockerHome=/home/ons/webapp
-
 # Base image
 FROM node:18-alpine AS build
 
 # Create workdir
-RUN mkdir -p $DockerHome
+RUN mkdir -p /home/ons/frontend
 
 # Set workdir
-WORKDIR $DockerHome
+WORKDIR /home/ons/frontend
 
 # Copy package.json & package-lock.json
 COPY package.json $DockerHome
@@ -23,8 +20,6 @@ COPY . $DockerHome
 # Build project
 RUN npm run build
 
-RUN ls -al
-
 # Create Nginx image
 FROM nginx:1.25-alpine
-COPY --from=build $DockerHome/build /usr/share/nginx/html
+COPY --from=build /home/ons/frontend/build /usr/share/nginx/html
