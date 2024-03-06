@@ -6,6 +6,9 @@
     export let data: PageData;
 
 </script>
+<svelte:head>
+    <title>Online Name Server</title>
+</svelte:head>
 <div class="grid grid-cols-3 gap-3">
     <!--male list-->
     <div class="mb-auto">
@@ -14,7 +17,7 @@
 
     <!--unisex list-->
     <div class="mb-auto">
-        <NameList title="Unisex" list={data.nameList.filter(e => e.gender == Gender.UNISEX).map(e => e.name)}></NameList>
+        <NameList title="🧒 - Unisex" list={data.nameList.filter(e => e.gender == Gender.UNISEX).map(e => e.name)}></NameList>
     </div>
 
     <!--female list-->
