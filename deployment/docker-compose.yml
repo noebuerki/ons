@@ -2,8 +2,8 @@ version: '3.3'
 
 services:
   mysql:
-    image: mysql:latest
-    container_name: "ons-mysql"
+    image: postgres:latest
+    container_name: "ons-postgres"
     environment:
       POSTGRES_ROOT_PASSWORD: "UKFZoaJh!Pddx9TP.UUV"
       POSTGRES_DATABASE: "ons"
@@ -11,7 +11,7 @@ services:
       POSTGRES_PASSWORD: "fqdeZRkKRLhWpcLB9y9D"
     volumes:
       - type: bind
-        target: /var/lib/postgresql/data
+        target: /var/lib/postgres/data
         source: /mnt/cache/appdata/ons/postgres
     networks:
       ons:
