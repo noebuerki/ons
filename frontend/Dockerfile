@@ -1,21 +1,24 @@
 # Base image
 FROM node:18-alpine AS build
 
+# Set env var
+ENV WorkDir=/home/ons/webapp
+
 # Create workdir
-RUN mkdir -p /home/ons/webapp
+RUN mkdir -p $WorkDir
 
 # Set workdir
-WORKDIR /home/ons/webapp
+WORKDIR $WorkDir
 
 # Copy package.json & package-lock.json
-COPY package.json $DockerHome
-COPY package-lock.json $DockerHome
+COPY package.json $WorkDir
+COPY package-lock.json $WorkDir
 
 # Install dependecies
 RUN npm install
 
 # Copy remaining code
-COPY . /home/ons/webapp
+COPY . $WorkDir
 
 # Build project
 RUN npm run build
