@@ -1,7 +1,7 @@
 version: '3.3'
 
 services:
-  mysql:
+  postgres:
     image: postgres:latest
     container_name: "ons-postgres"
     environment:
