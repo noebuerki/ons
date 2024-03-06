@@ -1,8 +1,8 @@
-# Base image
-FROM node:18-alpine AS build
-
 # Set workdir variable
 ENV DockerHome=/home/ons/webapp
+
+# Base image
+FROM node:18-alpine AS build
 
 # Create workdir
 RUN mkdir -p $DockerHome
