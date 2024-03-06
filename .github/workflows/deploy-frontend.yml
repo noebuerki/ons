@@ -23,7 +23,8 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          context: '../../../frontend'
+          context: frontend
+          file: frontend/Dockerfile
           tags: noebuerki/ons-webapp:latest
 
       - name: Trigger Stack redeploy
