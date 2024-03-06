@@ -10,6 +10,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+    
       - name: Set up Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -24,7 +27,6 @@ jobs:
         with:
           push: true
           context: frontend
-          file: frontend/Dockerfile
           tags: noebuerki/ons-webapp:latest
 
       - name: Trigger Stack redeploy
