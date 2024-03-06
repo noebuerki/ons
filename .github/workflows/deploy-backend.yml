@@ -26,7 +26,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          context: 'backend'
+          context: backend
           tags: noebuerki/ons-backend:latest
 
       - name: Trigger Stack redeploy
