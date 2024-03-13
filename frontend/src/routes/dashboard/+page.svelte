@@ -8,7 +8,15 @@
     export let data: PageData;
     
     let modalOpen = false;
-    $: console.log(modalOpen);
+    async function addName({detail}: any) {
+        await fetch('/api/names', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(detail)
+        });
+    }
 </script>
 <svelte:head>
     <title>Online Name Server</title>
@@ -30,8 +38,7 @@
     </div>
 </div>
 <Modal bind:open={modalOpen} title="Add name">
-    <AddName>
-    </AddName>
+    <AddName on:submit={addName}></AddName>
 </Modal>
 <Button class="absolute end-6 bottom-6 aspect-square" on:click={() => (modalOpen = true)} pill={true}>
     +
