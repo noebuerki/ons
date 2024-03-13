@@ -9,10 +9,6 @@ services:
       POSTGRES_DATABASE: "ons"
       POSTGRES_USER: "ons"
       POSTGRES_PASSWORD: "fqdeZRkKRLhWpcLB9y9D"
-    volumes:
-      - type: bind
-        target: /var/lib/postgres/data
-        source: /mnt/cache/appdata/ons/postgres
     networks:
       ons:
         ipv4_address: 10.10.13.10
@@ -22,15 +18,20 @@ services:
   backend:
     image: noebuerki/ons-backend:latest
     container_name: "ons-backend"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/home/ons/backend/
     ports:
-      - "8041:8000"
+      - "8000:8000"
     depends_on:
       migration:
-        condition: service_completed_successfully
+         condition: service_completed_successfully
       postgres:
         condition: service_healthy
     environment: &backend-environment
-      DJANGO_ALLOWED_HOSTS: localhost
+      DJANGO_DEBUG: true
     networks:
       ons:
         ipv4_address: 10.10.13.11
@@ -46,12 +47,6 @@ services:
     networks:
       ons:
         ipv4_address: 10.10.13.11
-
-  webapp:
-    image: noebuerki/ons-webapp:latest
-    container_name: "ons-webapp"
-    ports:
-      - "8040:80"
 
 networks:
   ons:

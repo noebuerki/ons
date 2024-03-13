@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+python -m pip install pip~=24.0 pip-tools~=7.4
+pip-sync requirements/requirements.txt requirements/requirements.txt

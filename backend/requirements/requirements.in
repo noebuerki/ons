@@ -1,0 +1,9 @@
+daphne == 3.0.2
+django == 4.2.11
+django-cors-headers == 4.3.1
+djangorestframework == 3.14.0
+drf-nested-routers == 0.93.5
+isort == 5.13.2
+psycopg2-binary == 2.9.9
+pytest == 8.1.0
+ruff == 0.3.0
