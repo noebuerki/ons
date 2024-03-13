@@ -2,9 +2,13 @@
 	import type { PageData } from "./$types";
 	import NameList from "$lib/NameList.svelte";
 	import { Gender } from "../../types/gender";
+	import { SpeedDial, Modal, SpeedDialButton, Button} from "flowbite-svelte";
+	import AddName from "./AddName.svelte";
 
     export let data: PageData;
-
+    
+    let modalOpen = false;
+    $: console.log(modalOpen);
 </script>
 <svelte:head>
     <title>Online Name Server</title>
@@ -25,3 +29,10 @@
         <NameList title="👩 - Female" list={data.nameList.filter(e => e.gender == Gender.FEMALE).map(e => e.name)}></NameList>
     </div>
 </div>
+<Modal bind:open={modalOpen} title="Add name">
+    <AddName>
+    </AddName>
+</Modal>
+<Button class="absolute end-6 bottom-6 aspect-square" on:click={() => (modalOpen = true)} pill={true}>
+    +
+</Button>

@@ -36,7 +36,7 @@
 
 <div class="flex w-full h-full">
     <Card class="m-auto">
-        <form on:submit={login} bind:this={form}>
+        <form on:submit|preventDefault={login} bind:this={form}>
             <div class="md:grid-cols mb-6 grid gap-6">
                 <div>
                     <Label for="username" class="mb-1">Username</Label>

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { A, Button, Card, Input, Label, P } from 'flowbite-svelte';
-	import type { LayoutData } from '../$types';
 
     function register() {
         

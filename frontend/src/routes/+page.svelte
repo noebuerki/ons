@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { replaceState } from '$app/navigation';
+	import { goto, replaceState } from '$app/navigation';
 	import type { LayoutData } from './$types';
 
     export let data: LayoutData;
     
-    if(browser) {
+    $:if(browser) {
         if(data.user.loggedIn) {
-            replaceState('/dashboard', { replace: true });
+            goto('/dashboard');
         } else {
-            replaceState('/login', { replace: true });
+            goto('/login');
         }
     }
 </script>
