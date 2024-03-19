@@ -4,10 +4,12 @@
 	import { Gender } from "../../types/gender";
 	import { Modal, Button} from "flowbite-svelte";
 	import AddName from "./AddName.svelte";
+	import { setContext } from "svelte";
 
     export let data: PageData;
     
     let modalOpen = false;
+    
     async function addName({detail}: any) {
         if (!detail) return;
         const res = await fetch('/api/names', {
@@ -55,7 +57,7 @@
     </div>
 </div>
 <Modal bind:open={modalOpen} title="Add name">
-    <AddName on:submit={addName}></AddName>
+    <AddName on:submit={addName} names={data.nameList.map(n => n.name)}></AddName>
 </Modal>
 <Button class="absolute end-6 bottom-6 aspect-square" on:click={() => (modalOpen = true)} pill={true}>
     +
