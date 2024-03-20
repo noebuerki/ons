@@ -1,31 +1,42 @@
 # Base image
-FROM python:3.11-slim-bullseye
+FROM python:3.11-alpine
 
-# Set workdir variable
-ENV DockerHome=/home/ons/backend
+# Update and upgrade apk
+RUN apk update && apk upgrade
 
 # Create workdir
-RUN mkdir -p $DockerHome
+RUN mkdir -p /app/backend
 
 # Set workdir
-WORKDIR $DockerHome
+WORKDIR /app/backend
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# Install pip
-RUN pip install --upgrade pip
 
 # Copy entire project
-COPY . $DockerHome
+COPY . .
+
+COPY .docker/entrypoint.sh entrypoint.sh
+
+# Install gcc
+RUN apk add --no-cache gcc musl-dev libffi-dev && rm -rf /var/cache/apk/*
+
+# Install pip
+RUN python -m pip install --upgrade pip
 
 # Install all dependencies
-RUN pip install -r requirements/requirements.txt
+RUN python -m pip install -r requirements/requirements.txt
+
+# Permissions entrypoint
+RUN chmod +x entrypoint.sh
 
 # Port where the Django app runs
 EXPOSE 8000
 
 RUN python manage.py collectstatic --noinput
 
-CMD ["daphne", "-b", "0.0.0.0", "-p", "8000", "asgi:application"]
+# Run entrypoint
+
+ENTRYPOINT [ "sh", "-c", "/app/backend/entrypoint.sh" ]
