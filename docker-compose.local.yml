@@ -9,6 +9,7 @@ services:
       POSTGRES_DATABASE: "ons"
       POSTGRES_USER: "ons"
       POSTGRES_PASSWORD: "fqdeZRkKRLhWpcLB9y9D"
+      
   backend:
     build:
       context: backend
@@ -25,7 +26,7 @@ services:
       dockerfile: Dockerfile
     container_name: "ons-frontend"
     environment:
-      - BACKEND_HOST=backend:8000
+      BACKEND_HOST: "backend:8000"
     depends_on:
       - backend
     ports:

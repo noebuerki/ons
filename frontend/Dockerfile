@@ -14,8 +14,9 @@ RUN npm install
 RUN npm run build
 
 # Create Nginx image
-FROM nginx:1.25-alpine
+FROM nginx:alpine-perl
 
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY .docker/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY .docker/nginx/default.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=build /app/build /app/serve-folder
