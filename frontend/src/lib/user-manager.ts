@@ -3,7 +3,7 @@ import { getCookie } from "./util";
 
 export function getCurrentUser(): User {
     return {
-        loggedIn: false,
+        loggedIn: true,
     }
 }
 

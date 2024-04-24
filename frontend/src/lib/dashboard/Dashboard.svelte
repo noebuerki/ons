@@ -1,12 +1,11 @@
 <script lang="ts">
-	import type { PageData } from "./$types";
 	import NameList from "$lib/NameList.svelte";
 	import { Gender } from "../../models/gender";
 	import { Modal, Button} from "flowbite-svelte";
 	import AddName from "./AddName.svelte";
-	import { setContext } from "svelte";
+	import type { Name } from "../../models/name";
 
-    export let data: PageData;
+    export let namelist: Array<Name> = [];
     
     let modalOpen = false;
     
@@ -21,7 +20,7 @@
         });
         if(res.ok || import.meta.env.MODE === 'development') {
             modalOpen = false;
-            data.nameList = [...data.nameList, detail];
+            namelist = [...namelist, detail];
         }
     }
     async function removeName(name: string) {
@@ -33,7 +32,7 @@
             body: JSON.stringify({name})
         });
         if(res.ok || import.meta.env.MODE === 'development') {
-            data.nameList = data.nameList.filter(e => e.name !== name);
+            namelist = namelist.filter(e => e.name !== name);
         }
     }
 </script>
@@ -43,21 +42,21 @@
 <div class="grid grid-cols-3 gap-3">
     <!--male list-->
     <div class="mb-auto">
-        <NameList title="👨 - Male" on:remove={({detail}) => removeName(detail)} list={data.nameList.filter(e => e.gender == Gender.MALE).map(e => e.name)}></NameList>
+        <NameList title="👨 - Male" on:remove={({detail}) => removeName(detail)} list={namelist.filter(e => e.gender == Gender.MALE).map(e => e.name)}></NameList>
     </div>
 
     <!--unisex list-->
     <div class="mb-auto">
-        <NameList title="🧒 - Unisex" on:remove={({detail}) => removeName(detail)} list={data.nameList.filter(e => e.gender == Gender.UNISEX).map(e => e.name)}></NameList>
+        <NameList title="🧒 - Unisex" on:remove={({detail}) => removeName(detail)} list={namelist.filter(e => e.gender == Gender.UNISEX).map(e => e.name)}></NameList>
     </div>
 
     <!--female list-->
     <div class="mb-auto">
-        <NameList title="👩 - Female" on:remove={({detail}) => removeName(detail)} list={data.nameList.filter(e => e.gender == Gender.FEMALE).map(e => e.name)}></NameList>
+        <NameList title="👩 - Female" on:remove={({detail}) => removeName(detail)} list={namelist.filter(e => e.gender == Gender.FEMALE).map(e => e.name)}></NameList>
     </div>
 </div>
 <Modal bind:open={modalOpen} title="Add name">
-    <AddName on:submit={addName} names={data.nameList.map(n => n.name)}></AddName>
+    <AddName on:submit={addName} names={namelist.map(n => n.name)}></AddName>
 </Modal>
 <Button class="absolute end-6 bottom-6 aspect-square" on:click={() => (modalOpen = true)} pill={true}>
     +
