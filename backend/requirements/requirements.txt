@@ -33,9 +33,12 @@ django==4.2.11
     # via
     #   -r requirements.in
     #   django-cors-headers
+    #   django-extensions
     #   djangorestframework
     #   drf-nested-routers
 django-cors-headers==4.3.1
+    # via -r requirements.in
+django-extensions==3.1.5
     # via -r requirements.in
 djangorestframework==3.14.0
     # via
