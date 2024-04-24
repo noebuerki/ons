@@ -1,14 +1,5 @@
 # Base image
-FROM python:3.11-alpine
-
-# Update and upgrade apk
-RUN apk update && apk upgrade
-
-# Install gcc
-RUN apk add --no-cache gcc musl-dev libffi-dev && rm -rf /var/cache/apk/*
-
-# Create workdir
-RUN mkdir -p /app/backend
+FROM python:3.11-slim-bullseye
 
 # Set workdir
 WORKDIR /app/backend
@@ -17,6 +8,8 @@ WORKDIR /app/backend
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
+# install system dependencies
+RUN apt-get update && apt-get install -y netcat
 
 # Copy entire project
 COPY . .
@@ -30,7 +23,6 @@ RUN python -m pip install -r requirements/requirements.txt
 # Port where the Django app runs
 EXPOSE 8000
 
-RUN python manage.py collectstatic --noinput
-
 # Run entrypoint
-CMD echo "Apply database migrations" && python manage.py migrate --noinput && daphne -b 0.0.0.0 -p 8000 asgi:application
+
+ENTRYPOINT [ "sh", "-c", "/app/backend/entrypoint.sh" ]
