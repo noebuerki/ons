@@ -7,7 +7,6 @@
 
 	function loginTrigger(ev: any) {
 		const { username, password } = Object.fromEntries(new FormData(form));
-		wrongPassword = true;
 		login({ username, password })
 			.then((res) => {
 				if (res.ok) {
@@ -17,9 +16,11 @@
 				}
 			})
 			.then((data) => {
+                wrongPassword = false;
 				console.log(data);
 			})
 			.catch((err) => {
+                wrongPassword = true;
 				console.error(err);
 			});
 	}

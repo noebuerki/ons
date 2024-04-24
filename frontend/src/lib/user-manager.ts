@@ -1,4 +1,5 @@
 import type { User } from "../models/user";
+import { getCookie } from "./util";
 
 export function getCurrentUser(): User {
     return {
@@ -26,6 +27,9 @@ export function register(user: object): Promise<Response> {
     });
 }
 
+
 export function logout(): void {
-    localStorage.removeItem('user');
+    const csrf = getCookie('csrftoken');
+    
+    fetch('/api/logout/', {method: 'POST', headers: {'X-CSRFToken': csrf}})
 }
