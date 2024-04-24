@@ -16,7 +16,7 @@ from api import serializers
 
 
 class NameViewSet(viewsets.ModelViewSet):
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    authentication_classes = [SessionAuthentication]
     permission_classes = [IsAuthenticated]
     serializer_class = serializers.NameSerializer
 
