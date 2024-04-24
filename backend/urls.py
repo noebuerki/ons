@@ -17,8 +17,6 @@ Including another URLconf
 
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.contrib.auth.views import LoginView
-from django.contrib.auth.views import LogoutView
 from django.urls import include
 from django.urls import path
 from rest_framework_nested import routers
@@ -33,6 +31,5 @@ router.register("names", viewset=viewsets.NameViewSet, basename="names")
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
-    path("api/login/", LoginView.as_view()),
-    path("api/logout/", LogoutView.as_view()),
+    path("api/accounts/", include("django.contrib.auth.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
