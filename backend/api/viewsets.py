@@ -1,5 +1,7 @@
 from django.contrib.auth import login
 from django.contrib.auth import logout
+from django.contrib.auth.models import User
+from rest_framework import generics
 from rest_framework import status
 from rest_framework import views
 from rest_framework import viewsets
@@ -39,3 +41,9 @@ class LogoutView(views.APIView):
     def post(self, request):
         logout(request)
         return Response(None, status=status.HTTP_204_NO_CONTENT)
+
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = [AllowAny]
+    serializer_class = serializers.RegisterSerializer
