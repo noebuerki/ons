@@ -17,7 +17,7 @@ class NameSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
 
 
-class LoginSerializer(serializers.ModelSerializer):
+class LoginSerializer(serializers.Serializer):
     username = serializers.CharField(label="username", write_only=True)
     password = serializers.CharField(
         label="password",
