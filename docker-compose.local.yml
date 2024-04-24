@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   db:
-    image: postgres:latest-alpine
+    image: postgres:latest
     container_name: "ons-db"
     environment:
       POSTGRES_ROOT_PASSWORD: "UKFZoaJh!Pddx9TP.UUV"
@@ -23,6 +23,12 @@ services:
       DATABASE_HOST: "db"
     ports:
       - 8000:8000
+    volumes:
+      - type: bind
+        source: ./backend
+        target: /app/backend
+        read_only: true
+
 
   frontend:
     build:
