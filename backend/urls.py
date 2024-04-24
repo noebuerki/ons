@@ -31,5 +31,6 @@ router.register("names", viewset=viewsets.NameViewSet, basename="names")
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
-    path("api/accounts/", include("django.contrib.auth.urls")),
+    path("api/login/", viewsets.LoginView.as_view()),
+    path("api/logout/", viewsets.LogoutView.as_view()),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
