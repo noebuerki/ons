@@ -9,6 +9,7 @@
         <NavHamburger />
         <NavUl>
             <NavLi href="/">Home</NavLi>
+            <NavLi href="/logout">Logout</NavLi>
         </NavUl>
     </NavContainer>
 </Navbar>
