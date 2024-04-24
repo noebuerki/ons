@@ -1,5 +1,5 @@
-import { Gender } from '../../types/gender.js';
-import type { Name } from '../../types/name.js';
+import { Gender } from '../../models/gender.js';
+import type { Name } from '../../models/name.js';
 
 export async function load({parent}) {
     const parentData = await parent();
