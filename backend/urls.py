@@ -27,11 +27,11 @@ from api import viewsets
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register("names", viewset=viewsets.NameViewSet, basename="names")
+router.register("register", viewset=viewsets.RegisterView, basename="register")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
     path("api/login/", viewsets.LoginView.as_view()),
     path("api/logout/", viewsets.LogoutView.as_view()),
-    path("api/register/", viewsets.RegisterView.as_view()),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
