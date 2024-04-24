@@ -17,6 +17,12 @@ class NameSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
 
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.User
+        fields = ("username",)
+
+
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField(label="username", write_only=True)
     password = serializers.CharField(

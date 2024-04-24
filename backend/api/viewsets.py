@@ -24,6 +24,12 @@ class NameViewSet(viewsets.ModelViewSet):
         return models.Name.objects.filter(user=self.request.user)
 
 
+class UserViewSet(viewsets.ModelViewSet, mixins.ListModelMixin):
+    queryset = User.objects.all()
+    authentication_classes = [SessionAuthentication]
+    serializer_class = serializers.UserSerializer
+
+
 class LoginView(views.APIView):
     permission_classes = [AllowAny]
 

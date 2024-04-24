@@ -27,6 +27,7 @@ from api import viewsets
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register("names", viewset=viewsets.NameViewSet, basename="names")
+router.register("users", viewset=viewsets.UserViewSet, basename="users")
 router.register("register", viewset=viewsets.RegisterView, basename="register")
 
 urlpatterns = [
