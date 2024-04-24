@@ -24,7 +24,7 @@ from django.urls import path
 from rest_framework_nested import routers
 
 import settings
-from core import viewsets
+from api import viewsets
 
 
 router = routers.DefaultRouter(trailing_slash=False)

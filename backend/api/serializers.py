@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from core import models
+from api import models
 
 
 class NameSerializer(serializers.ModelSerializer):
