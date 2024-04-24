@@ -1,10 +1,21 @@
 <script>
+
     import Header from "$lib/Header.svelte";
+	import { getCurrentUser } from "$lib/user-manager";
+	import { writable } from "svelte/store";
     import "../app.pcss";
+	import { setContext } from "svelte";
+
+	const user = writable();
+    const currentUser = getCurrentUser();
+
+	$: user.set(currentUser);
+	
+	// ...and add it to the context for child components to access
+	setContext('user', user);
 </script>
 <div class="h-screen grid my-body">
-    <Header>
-    </Header>
+    <Header></Header>
     <main class="w-full h-full">
         <slot></slot>
     </main>

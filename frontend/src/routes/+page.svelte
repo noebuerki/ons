@@ -1,15 +1,7 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
-	import { goto, replaceState } from '$app/navigation';
-	import type { LayoutData } from './$types';
+	import { goto } from "$app/navigation";
+	import { page } from "$app/stores";
 
-    export let data: LayoutData;
-    
-    $:if(browser) {
-        if(data.user.loggedIn) {
-            goto('/dashboard');
-        } else {
-            goto('/login');
-        }
-    }
 </script>
+
+<h1>Welcome to ONS</h1>

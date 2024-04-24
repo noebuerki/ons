@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Button, Helper, Input, Label, Select } from 'flowbite-svelte';
-	import { Gender } from '../../types/gender';
+	import { Gender } from '../../models/gender';
 	import { createEventDispatcher } from 'svelte';
 
     export let names: Array<string>;

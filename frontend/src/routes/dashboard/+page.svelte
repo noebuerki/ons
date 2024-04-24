@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PageData } from "./$types";
 	import NameList from "$lib/NameList.svelte";
-	import { Gender } from "../../types/gender";
+	import { Gender } from "../../models/gender";
 	import { Modal, Button} from "flowbite-svelte";
 	import AddName from "./AddName.svelte";
 	import { setContext } from "svelte";
