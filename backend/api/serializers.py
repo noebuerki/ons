@@ -20,7 +20,7 @@ class NameSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ("username",)
+        fields = ("username", "email")
 
 
 class LoginSerializer(serializers.Serializer):
@@ -61,14 +61,17 @@ class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
         write_only=True, required=True, validators=[validate_password]
     )
+    email = serializers.EmailField(
+        write_only=True, required=False, allow_blank=True, default=""
+    )
 
     class Meta:
         model = User
-        fields = ("username", "password")
+        fields = ("username", "password", "email")
 
     def create(self, validated_data):
         user = User.objects.create(
-            username=validated_data["username"],
+            username=validated_data["username"], email=validated_data["email"]
         )
 
         user.set_password(validated_data["password"])
