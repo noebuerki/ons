@@ -29,6 +29,7 @@
     main {
         padding: 2rem;
         max-width: 1400px;
+        margin: 0 auto;
         height: 100%;
     }
     .my-body {
