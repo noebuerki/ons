@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { register } from '$lib/user-manager';
+	import { register } from '$lib/login-controls';
 	import { A, Button, Card, Input, Label, P } from 'flowbite-svelte';
 
     let passwordDontMatch = false;

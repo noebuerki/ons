@@ -1,15 +1,16 @@
 <script>
-
-    import Header from "$lib/Header.svelte";
-	import { getCurrentUser } from "$lib/user-manager";
+    import Header from "$lib/components/Header.svelte";
+	import { getCurrentUser } from "$lib/login-controls";
 	import { writable } from "svelte/store";
     import "../app.pcss";
-	import { setContext } from "svelte";
+	import { onMount, setContext } from "svelte";
 
 	const user = writable();
-    const currentUser = getCurrentUser();
+    onMount(async () => {
+        const currentUser = await getCurrentUser();
 
-	$: user.set(currentUser);
+        user.set(currentUser);
+    });
 	
 	// ...and add it to the context for child components to access
 	setContext('user', user);

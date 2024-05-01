@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { login } from '$lib/user-manager';
+	import { login } from '$lib/login-controls';
 	import { A, Button, Card, Helper, Input, Label, P } from 'flowbite-svelte';
 
 	let wrongPassword = false;
