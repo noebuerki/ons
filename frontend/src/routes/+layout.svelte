@@ -4,6 +4,7 @@
 	import { writable } from "svelte/store";
     import "../app.pcss";
 	import { onMount, setContext } from "svelte";
+	import logo from '$lib/assets/logo.svg';
 
 	const user = writable();
     onMount(async () => {
@@ -15,6 +16,9 @@
 	// ...and add it to the context for child components to access
 	setContext('user', user);
 </script>
+<svelte:head>
+    <link rel="icon" href="{logo}" />
+</svelte:head>
 <div class="h-screen grid my-body">
     <Header></Header>
     <main class="w-full h-full">
