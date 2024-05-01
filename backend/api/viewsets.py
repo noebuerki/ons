@@ -5,7 +5,7 @@ from rest_framework import mixins
 from rest_framework import status
 from rest_framework import views
 from rest_framework import viewsets
-from rest_framework.authentication import BasicAuthentication
+from rest_framework.decorators import action
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import AllowAny
 from rest_framework.permissions import IsAuthenticated
@@ -28,6 +28,10 @@ class UserViewSet(viewsets.ModelViewSet, mixins.ListModelMixin):
     queryset = User.objects.all()
     authentication_classes = [SessionAuthentication]
     serializer_class = serializers.UserSerializer
+
+    @action(methods=["GET"])
+    def me(self, request):
+        Response(serializers.UserSerializer(instance=request.user).data)
 
 
 class LoginView(views.APIView):
