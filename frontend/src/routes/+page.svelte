@@ -7,11 +7,10 @@
 
     const user: Writable<User> = getContext("user");
     
-    onMount(() => {
-        if(!$user.loggedIn) {
-            goto("/login");
-        }
-    });
+    $: if($user && $user.loggedIn === false) {
+        console.log("User is not logged in");
+        goto("/login");
+    }
 </script>
 <svelte:head>
     <title>ONS</title>

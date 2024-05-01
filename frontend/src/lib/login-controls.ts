@@ -9,11 +9,20 @@ export async function getCurrentUser(): Promise<User> {
     const csrf = getCsrfToken();
     
     const response = await fetch('/api/users/me', {headers: {'X-CSRFToken': csrf}})
-        .then(response => response.json());
-        
+        .then(async (response) => {
+            if (!response.ok) throw new Error('Failed to fetch user');
+
+            const user = await response.json();
+
+            return { username: user.username, loggedIn: true };
+        })
+        .catch((_) => ({username: 'Anonymous', loggedIn: false}));
+
+        console.log(response);
+
     return {
         username: response.username,
-        loggedIn: response.is_authenticated
+        loggedIn: response.loggedIn
     }
 }
 
