@@ -31,7 +31,7 @@ class UserViewSet(viewsets.ModelViewSet, mixins.ListModelMixin):
 
     @action(methods=["GET"], detail=False)
     def me(self, request):
-        Response(serializers.UserSerializer(instance=request.user).data)
+        return Response(serializers.UserSerializer(instance=request.user).data)
 
 
 class LoginView(views.APIView):
