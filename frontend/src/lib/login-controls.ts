@@ -1,9 +1,19 @@
 import type { User } from "../models/user";
 import { getCookie } from "./util";
 
-export function getCurrentUser(): User {
+function getCsrfToken(): string {
+    return getCookie('csrftoken');
+}
+
+export async function getCurrentUser(): Promise<User> {
+    const csrf = getCsrfToken();
+    
+    const response = await fetch('/api/users/me', {headers: {'X-CSRFToken': csrf}})
+        .then(response => response.json());
+        
     return {
-        loggedIn: true,
+        username: response.username,
+        loggedIn: response.is_authenticated
     }
 }
 
@@ -29,7 +39,7 @@ export function register(user: object): Promise<Response> {
 
 
 export function logout(): void {
-    const csrf = getCookie('csrftoken');
+    const csrf = getCsrfToken();
     
     fetch('/api/logout/', {method: 'POST', headers: {'X-CSRFToken': csrf}})
 }

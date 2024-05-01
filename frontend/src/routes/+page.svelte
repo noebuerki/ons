@@ -3,7 +3,7 @@
 	import type { User } from "../models/user";
 	import { getContext, onMount } from "svelte";
 	import { goto } from "$app/navigation";
-	import Dashboard from "$lib/dashboard/Dashboard.svelte";
+	import Dashboard from "./Dashboard.svelte";
 
     const user: Writable<User> = getContext("user");
     
@@ -13,7 +13,9 @@
         }
     });
 </script>
-
+<svelte:head>
+    <title>ONS</title>
+</svelte:head>
 <div>
     <Dashboard namelist={[]}></Dashboard>
 </div>

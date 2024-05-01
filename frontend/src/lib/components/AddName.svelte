@@ -8,17 +8,19 @@
 
 	const values = Object.entries(Gender).map((v) => ({ value: v[1], name: v[0] }));
     let form: HTMLFormElement;
+    let isValidName = true;
+
     
 
     function submit() {
-        const params = Object.fromEntries(new FormData(form));
+        const params = Object.fromEntries(new FormData(form)) as any;
         dispatch('submit', params);
-    }
 
-    function isValidName(name: string) {
-        return !names.includes(name);
+        if (names.includes(params.name)) {
+            isValidName = false;
+            return;
+        }
     }
-
 
 </script>
 
@@ -28,10 +30,11 @@
 		<div>
 			<Label for="name-input" class="mb-2">Name</Label>
 			<Input type="text" name="name" id="name-input" placeholder="John" required />
-            <Helper class="mt-2" color="red">
-                <span class="font-medium">Oh, snapp!</span>
-                Wrong password, try again.
-            </Helper>
+            {#if !isValidName}
+                <Helper class="mt-2" color="red">
+                    Name already exists
+                </Helper>
+            {/if}
 		</div>
 		<div>
 			<Select id="countries" class="mt-2" value={Gender.UNISEX} name="gender">

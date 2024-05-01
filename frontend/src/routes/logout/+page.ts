@@ -1,4 +1,4 @@
-import { logout } from "$lib/user-manager";
+import { logout } from "$lib/login-controls";
 import { redirect } from "@sveltejs/kit";
 
 export const ssr = false;

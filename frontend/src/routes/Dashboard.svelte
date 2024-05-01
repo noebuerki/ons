@@ -1,9 +1,9 @@
 <script lang="ts">
-	import NameList from "$lib/NameList.svelte";
-	import { Gender } from "../../models/gender";
+	import NameList from "$lib/components/NameList.svelte";
+	import { Gender } from "../models/gender";
 	import { Modal, Button} from "flowbite-svelte";
-	import AddName from "./AddName.svelte";
-	import type { Name } from "../../models/name";
+	import AddName from "../lib/components/AddName.svelte";
+	import type { Name } from "../models/name";
 
     export let namelist: Array<Name> = [];
     
@@ -36,9 +36,6 @@
         }
     }
 </script>
-<svelte:head>
-    <title>Online Name Server</title>
-</svelte:head>
 <div class="grid grid-cols-3 gap-3">
     <!--male list-->
     <div class="mb-auto">
