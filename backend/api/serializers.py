@@ -19,7 +19,7 @@ class NameSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.User
+        model = User
         fields = ("username",)
 
 
