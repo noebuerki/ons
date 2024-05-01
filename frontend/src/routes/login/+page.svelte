@@ -1,27 +1,33 @@
 <script lang="ts">
 	import { login } from '$lib/login-controls';
 	import { A, Button, Card, Helper, Input, Label, P } from 'flowbite-svelte';
+	import type { User } from '../../models/user';
+	import { getContext } from 'svelte';
+	import type { Writable } from 'svelte/store';
+	import { goto } from '$app/navigation';
 
 	let wrongPassword = false;
 	let form: HTMLFormElement;
 
+    const user: Writable<User> = getContext('user');
+
+    $: if ($user?.loggedIn === true) {
+        goto('/');
+    }
+
 	function loginTrigger(ev: any) {
 		const { username, password } = Object.fromEntries(new FormData(form));
 		login({ username, password })
-			.then((res) => {
+			.then(async (res) => {
 				if (res.ok) {
-					return res.json();
+
+					const data = await res.json();
+                    wrongPassword = false;
+                    user.set({username: data.username, loggedIn: true});
+
 				} else {
-					throw new Error('Invalid credentials');
+                    wrongPassword = true;
 				}
-			})
-			.then((data) => {
-                wrongPassword = false;
-				console.log(data);
-			})
-			.catch((err) => {
-                wrongPassword = true;
-				console.error(err);
 			});
 	}
 </script>

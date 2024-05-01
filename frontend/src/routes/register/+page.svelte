@@ -1,9 +1,21 @@
 <script lang="ts">
 	import { register } from '$lib/login-controls';
 	import { A, Button, Card, Input, Label, P } from 'flowbite-svelte';
+	import { getContext } from 'svelte';
+	import type { Writable } from 'svelte/store';
+	import type { User } from '../../models/user';
+	import { goto } from '$app/navigation';
 
     let passwordDontMatch = false;
     let form: HTMLFormElement;
+
+    let somethingWrong = false;
+
+    const user: Writable<User> = getContext('user');
+
+    $: if ($user?.loggedIn === true) {
+        goto('/');
+    }
     function registerTrigger() {
         const { username, password, password1 } = Object.fromEntries(new FormData(form));
         if (password !== password1) {
@@ -14,19 +26,15 @@
         }
 
         register({ username, password })
-            .then((res) => {
+            .then(async (res) => {
                 if (res.ok) {
-                    return res.json();
+                    const data = await res.json();
+                    user.set({username: data.username, loggedIn: true});
                 } else {
-                    throw new Error('Invalid input');
+                    somethingWrong = true;
                 }
-            })
-            .then((data) => {
-                console.log(data);
-            })
-            .catch((err) => {
-                console.error(err);
             });
+
     }
 </script>
 
