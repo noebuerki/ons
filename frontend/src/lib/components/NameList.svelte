@@ -11,7 +11,7 @@
         dispatch('remove', name);
     }
 </script>
-<Card>
+<Card size="none">
     <Heading tag="h5" class="text-center">{title}</Heading>
 
     <Hr />
