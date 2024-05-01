@@ -29,7 +29,7 @@ class UserViewSet(viewsets.ModelViewSet, mixins.ListModelMixin):
     authentication_classes = [SessionAuthentication]
     serializer_class = serializers.UserSerializer
 
-    @action(methods=["GET"])
+    @action(methods=["GET"], detail=False)
     def me(self, request):
         Response(serializers.UserSerializer(instance=request.user).data)
 
