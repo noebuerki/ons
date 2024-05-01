@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import Header from "$lib/components/Header.svelte";
 	import { getCurrentUser } from "$lib/login-controls";
 	import { writable } from "svelte/store";
@@ -6,7 +6,7 @@
 	import { onMount, setContext } from "svelte";
 	import logo from '$lib/assets/logo.svg';
 
-	const user = writable();
+	const user = writable<any>(null);
     onMount(async () => {
         const currentUser = await getCurrentUser();
 

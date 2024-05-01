@@ -1,9 +1,5 @@
 import type { User } from "../models/user";
-import { getCookie } from "./util";
-
-function getCsrfToken(): string {
-    return getCookie('csrftoken');
-}
+import { getCsrfToken } from "./util";
 
 export async function getCurrentUser(): Promise<User> {
     const csrf = getCsrfToken();
@@ -17,9 +13,7 @@ export async function getCurrentUser(): Promise<User> {
             return { username: user.username, loggedIn: true };
         })
         .catch((_) => ({username: 'Anonymous', loggedIn: false}));
-
-        console.log(response);
-
+        
     return {
         username: response.username,
         loggedIn: response.loggedIn

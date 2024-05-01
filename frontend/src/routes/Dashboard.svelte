@@ -4,6 +4,7 @@
 	import { Modal, Button} from "flowbite-svelte";
 	import AddName from "../lib/components/AddName.svelte";
 	import type { Name } from "../models/name";
+	import { createName, deleteName } from "$lib/name-api";
 
     export let namelist: Array<Name> = [];
     
@@ -11,28 +12,19 @@
     
     async function addName({detail}: any) {
         if (!detail) return;
-        const res = await fetch('/api/names', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(detail)
-        });
-        if(res.ok || import.meta.env.MODE === 'development') {
+
+        const res = await createName(detail);
+
+        if(res.ok) {
             modalOpen = false;
             namelist = [...namelist, detail];
         }
     }
-    async function removeName(name: string) {
-        const res = await fetch('/api/names', {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({name})
-        });
-        if(res.ok || import.meta.env.MODE === 'development') {
-            namelist = namelist.filter(e => e.name !== name);
+    async function removeName(name: Name) {
+        const res = await deleteName(name.id);
+
+        if(res.ok) {
+            namelist = namelist.filter(e => e.id !== name.id);
         }
     }
 </script>

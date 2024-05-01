@@ -4,17 +4,24 @@
 	import { getContext, onMount } from "svelte";
 	import { goto } from "$app/navigation";
 	import Dashboard from "./Dashboard.svelte";
+	import { getNames } from "$lib/name-api";
+	import { names } from "../stores/names";
 
     const user: Writable<User> = getContext("user");
     
     $: if($user && $user.loggedIn === false) {
-        console.log("User is not logged in");
         goto("/login");
     }
+
+    onMount(async () => {
+        const namesResponse = await getNames();
+        names.set(namesResponse);
+    });
 </script>
 <svelte:head>
-    <title>ONS</title>
+    <title>ONS - Dashboard</title>
 </svelte:head>
-<div>
-    <Dashboard namelist={[]}></Dashboard>
-</div>
+
+{#if $user && $user.loggedIn}
+    <Dashboard namelist={$names} />
+{/if}
