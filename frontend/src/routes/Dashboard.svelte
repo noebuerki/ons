@@ -14,6 +14,7 @@
         if (!detail) return;
 
         const res = await createName(detail);
+        console.log(res);
 
         if(res.ok) {
             modalOpen = false;

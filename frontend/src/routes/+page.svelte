@@ -15,7 +15,8 @@
 
     onMount(async () => {
         const namesResponse = await getNames();
-        names.set(namesResponse);
+        
+        names.set(namesResponse.data);
     });
 </script>
 <svelte:head>
