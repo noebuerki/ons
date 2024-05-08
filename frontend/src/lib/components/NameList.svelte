@@ -1,13 +1,14 @@
 <script lang="ts">
     import { Li, List, P, Hr, Heading, Card, Button } from "flowbite-svelte";
 	import { createEventDispatcher } from "svelte";
+	import type { Name } from "../../models/name";
 
     export let title = 'Name List';
-    export let list = ['John', 'Doe', 'Jane', 'Doe'];
+    export let list: Array<Name> = [];
 
     const dispatch = createEventDispatcher();
 
-    function remove(name: string) {
+    function remove(name: Name) {
         dispatch('remove', name);
     }
 </script>
@@ -20,7 +21,7 @@
             <Li class="py-1 font-normal">
                 <Card padding="none">
                     <div class="flex place-content-between items-center p-1">
-                        <P>{item}</P><Button on:click={() => remove(item)} size="xs">remove</Button>
+                        <P>{item.name}</P><Button on:click={() => remove(item)} size="xs">remove</Button>
                     </div>
                 </Card>
             </Li>

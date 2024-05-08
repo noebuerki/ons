@@ -14,35 +14,37 @@
         if (!detail) return;
 
         const res = await createName(detail);
-        console.log(res);
 
-        if(res.ok) {
+        // if the axios call was successful, add the new name to the list
+        if (res.status == 201) {
             modalOpen = false;
-            namelist = [...namelist, detail];
+            namelist = [...namelist, res.data];
         }
     }
     async function removeName(name: Name) {
         const res = await deleteName(name.id);
 
-        if(res.ok) {
-            namelist = namelist.filter(e => e.id !== name.id);
+        // if the axios call was successful, remove the name from the list
+
+        if (res.status == 204) {
+            namelist = namelist.filter(n => n.id != name.id);
         }
     }
 </script>
 <div class="grid grid-cols-3 gap-3">
     <!--male list-->
     <div class="mb-auto">
-        <NameList title="👨 - Male" on:remove={({detail}) => removeName(detail)} list={namelist.filter(e => e.gender == Gender.MALE).map(e => e.name)}></NameList>
+        <NameList title="👨 - Male" on:remove={({detail}) => removeName(detail)} list={namelist.filter(e => e.gender == Gender.MALE)}></NameList>
     </div>
 
     <!--unisex list-->
     <div class="mb-auto">
-        <NameList title="🧒 - Unisex" on:remove={({detail}) => removeName(detail)} list={namelist.filter(e => e.gender == Gender.UNISEX).map(e => e.name)}></NameList>
+        <NameList title="🧒 - Unisex" on:remove={({detail}) => removeName(detail)} list={namelist.filter(e => e.gender == Gender.UNISEX)}></NameList>
     </div>
 
     <!--female list-->
     <div class="mb-auto">
-        <NameList title="👩 - Female" on:remove={({detail}) => removeName(detail)} list={namelist.filter(e => e.gender == Gender.FEMALE).map(e => e.name)}></NameList>
+        <NameList title="👩 - Female" on:remove={({detail}) => removeName(detail)} list={namelist.filter(e => e.gender == Gender.FEMALE)}></NameList>
     </div>
 </div>
 <Modal bind:open={modalOpen} title="Add name">
