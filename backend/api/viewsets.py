@@ -1,6 +1,6 @@
 from django.contrib.auth import login
 from django.contrib.auth import logout
-from django.contrib.auth.models import User
+from django.contrib.auth import update_session_auth_hash
 from rest_framework import mixins
 from rest_framework import status
 from rest_framework import views
@@ -25,7 +25,7 @@ class NameViewSet(viewsets.ModelViewSet):
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
+    queryset = models.User.objects.all()
     authentication_classes = [SessionAuthentication]
     serializer_class = serializers.UserSerializer
 
@@ -54,6 +54,6 @@ class LogoutView(views.APIView):
 
 
 class RegisterView(viewsets.GenericViewSet, mixins.CreateModelMixin):
-    queryset = User.objects.all()
+    queryset = models.User.objects.all()
     permission_classes = [AllowAny]
     serializer_class = serializers.RegisterSerializer

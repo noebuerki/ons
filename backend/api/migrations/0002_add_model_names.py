@@ -11,6 +11,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ("api", "0001_add_custom_user_model"),
     ]
 
     operations = [

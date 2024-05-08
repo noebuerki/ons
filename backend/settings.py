@@ -146,3 +146,13 @@ STATIC_ROOT = BASE_DIR / "static"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AUTH_USER_MODEL = "backend.api.User"
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST = "smtp.office365.com"
+EMAIL_HOST_USER = "mail@noebuerki.ch"
+EMAIL_HOST_PASSWORD = "q@936038601238ax"
