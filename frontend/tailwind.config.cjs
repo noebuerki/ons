@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config}*/
 const config = {
     content: ["./src/**/*.{html,js,svelte,ts}", './node_modules/flowbite-svelte/**/*.{html,js,svelte,ts}'],
+    darkMode: 'class',
     theme: {
         extend: {
             colors: {
@@ -16,7 +17,7 @@ const config = {
                     700: '#4F27EB',
                     800: '#4522CC',
                     900: '#371BA5'
-                }  
+                }
             }
         }
     },

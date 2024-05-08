@@ -22,7 +22,6 @@
 			const response = await login({ username, password });
 
 			if (isOk(response)) {
-				console.log('Ok');
 				const data = response.data;
 				user.set({ email: data.email, username: data.username, loggedIn: true });
 			} else {
