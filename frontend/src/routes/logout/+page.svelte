@@ -9,7 +9,7 @@
         
     onMount(async () => {
         await logout();
-        user.set({ username: null, loggedIn: false})
+        user.set({ email: null, username: null, loggedIn: false})
         goto('/');
     });
 </script>

@@ -19,7 +19,7 @@
 <svelte:head>
     <link rel="icon" href="{logo}" />
 </svelte:head>
-<div class="h-screen grid my-body">
+<div class="h-screen grid my-body bg-white dark:bg-gray-800">
     <Header></Header>
     <main class="w-full h-full">
         <slot></slot>
