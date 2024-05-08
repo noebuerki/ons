@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$DATABASE" = "phi" ]
+if [ "$DATABASE" = "ons" ]
 then
     echo "Waiting for postgres..."
 
@@ -16,4 +16,4 @@ python manage.py collectstatic --noinput
 
 python manage.py migrate --noinput
 
-daphne -b 0.0.0.0 -p 8000 asgi:application
+daphne -b 0.0.0.0 -p 8000 backend.asgi:application

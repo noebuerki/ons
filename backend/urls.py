@@ -21,8 +21,8 @@ from django.urls import include
 from django.urls import path
 from rest_framework_nested import routers
 
-import settings
-from api import viewsets
+from backend import settings
+from backend.api import viewsets
 
 
 router = routers.DefaultRouter(trailing_slash=False)

@@ -16,8 +16,8 @@ services:
       start_period: 4s
   backend:
     build:
-      context: backend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./backend/Dockerfile
     container_name: "ons-backend"
     depends_on:
       db:

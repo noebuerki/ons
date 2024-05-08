@@ -2,7 +2,7 @@
 FROM python:3.11-slim-bullseye
 
 # Set workdir
-WORKDIR /app/backend
+WORKDIR /app
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -12,13 +12,14 @@ ENV PYTHONUNBUFFERED 1
 RUN apt-get update && apt-get install -y netcat
 
 # Copy entire project
-COPY . .
+COPY ./backend ./
+COPY ./manage.py ./
 
 # Install pip
 RUN python -m pip install --upgrade pip
 
 # Install all dependencies
-RUN python -m pip install -r requirements/requirements.txt
+RUN python -m pip install -r backend/requirements/requirements.txt
 
 # Port where the Django app runs
 EXPOSE 8000

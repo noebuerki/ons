@@ -11,8 +11,8 @@ from rest_framework.permissions import AllowAny
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from api import models
-from api import serializers
+from backend.api import models
+from backend.api import serializers
 
 
 class NameViewSet(viewsets.ModelViewSet):
