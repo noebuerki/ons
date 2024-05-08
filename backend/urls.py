@@ -35,4 +35,8 @@ urlpatterns = [
     path("api/", include(router.urls)),
     path("api/login/", viewsets.LoginView.as_view()),
     path("api/logout/", viewsets.LogoutView.as_view()),
+    path(
+        "api/password_reset/",
+        include("django_rest_passwordreset.urls", namespace="password_reset"),
+    ),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
