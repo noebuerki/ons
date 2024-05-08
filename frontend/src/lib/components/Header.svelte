@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { NavBrand, NavHamburger, NavLi, NavUl, Navbar } from "flowbite-svelte";
+    import { DarkMode, NavBrand, NavHamburger, NavLi, NavUl, Navbar } from "flowbite-svelte";
     import logo from '$lib/assets/logo.svg?raw';
 </script>
 <Navbar let:NavContainer color="primary">
@@ -13,6 +13,7 @@
             <span class="self-center whitespace-nowrap text-xl font-semibold">Online Name Server</span>
         </NavBrand>
         <div class="flex">
+            <DarkMode class="my-auto" />
             <NavHamburger />
             <NavUl>
                 <NavLi cla href="/">Dashboard</NavLi>
