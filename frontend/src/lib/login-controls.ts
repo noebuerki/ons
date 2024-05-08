@@ -1,54 +1,38 @@
+import { axios } from "$lib";
+import type { AxiosResponse } from "axios";
 import type { User } from "../models/user";
 import { getCsrfToken } from "./util";
 
 export async function getCurrentUser(): Promise<User> {
-    const csrf = getCsrfToken();
-    
-    const response = await fetch('/api/users/me', {headers: {'X-CSRFToken': csrf}})
-        .then(async (response) => {
-            if (!response.ok) throw new Error('Failed to fetch user');
 
-            const user = await response.json();
+    try {
+        const response = await axios.get('/users/me');
 
-            return { username: user.username, loggedIn: true };
-        })
-        .catch((_) => ({username: 'Anonymous', loggedIn: false}));
-        
-    return {
-        username: response.username,
-        loggedIn: response.loggedIn
+        const user = response.data;
+
+        return { email: user.email, username: user.username, loggedIn: true };
+    } catch (error) {
+        return { email: null, username: null, loggedIn: false };
     }
 }
 
-export function login(user: object): Promise<Response> {
-    const csrf = getCsrfToken();
-    
-    return fetch('/api/login/', {
-        method: 'POST',
+export function login(user: object): Promise<AxiosResponse> {    
+    return axios.post('/login/', user, {
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRFToken': csrf
-        },
-        body: JSON.stringify(user)
+        }
     });
 }
 
-export function register(user: object): Promise<Response> {
-    const csrf = getCsrfToken();
-    
-    return fetch('/api/register', {
-        method: 'POST',
+export function register(user: object): Promise<AxiosResponse> {
+    return axios.post('/register', user, {
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRFToken': csrf
-        },
-        body: JSON.stringify(user)
+        }
     });
 }
 
 
 export async function logout(): Promise<void> {
-    const csrf = getCsrfToken();
-    
-    await fetch('/api/logout/', {method: 'POST', headers: {'X-CSRFToken': csrf}})
+    await axios.post('/logout/');
 }

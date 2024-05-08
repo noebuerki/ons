@@ -5,30 +5,27 @@
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 	import { goto } from '$app/navigation';
+	import { isOk } from '$lib/util';
 
 	let wrongPassword = false;
 	let form: HTMLFormElement;
 
-    const user: Writable<User> = getContext('user');
+	const user: Writable<User> = getContext('user');
 
-    $: if ($user?.loggedIn === true) {
-        goto('/');
-    }
+	$: if ($user?.loggedIn === true) {
+		goto('/');
+	}
 
-	function loginTrigger(ev: any) {
+	async function loginTrigger(ev: any) {
 		const { username, password } = Object.fromEntries(new FormData(form));
-		login({ username, password })
-			.then(async (res) => {
-				if (res.ok) {
+		const response = await login({ username, password });
 
-					const data = await res.json();
-                    wrongPassword = false;
-                    user.set({username: data.username, loggedIn: true});
-
-				} else {
-                    wrongPassword = true;
-				}
-			});
+		if (isOk(response)) {
+			const data = response.data;
+			user.set({ email: data.email, username: data.username, loggedIn: true });
+		} else {
+			wrongPassword = true;
+		}
 	}
 </script>
 

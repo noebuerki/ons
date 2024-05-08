@@ -1,3 +1,5 @@
+import type { AxiosResponse } from "axios";
+
 export function getCookie(cname: string) {
     const name = cname + "=";
     const ca = document.cookie.split(';');
@@ -15,4 +17,8 @@ export function getCookie(cname: string) {
 
 export function getCsrfToken(): string {
     return getCookie('csrftoken');
+}
+
+export function isOk(response: AxiosResponse) {
+    return response.status >= 200 && response.status < 300;
 }
