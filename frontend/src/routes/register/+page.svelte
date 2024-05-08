@@ -17,7 +17,7 @@
     $: if ($user?.loggedIn === true) {
         goto('/');
     }
-    
+
     async function registerTrigger() {
         const { email, username, password, password1 } = Object.fromEntries(new FormData(form));
         if (password !== password1) {
@@ -26,12 +26,16 @@
         } else {
             passwordDontMatch = false;
         }
-        const res = await register({ email, username, password });
-        
-        if (isOk(res)) {
-            const data = res.data;
-            user.set({ email: data.email, username: data.username, loggedIn: true });
-        } else {
+        try {
+            const res = await register({ email, username, password });
+            
+            if (isOk(res)) {
+                const data = res.data;
+                user.set({ email: data.email, username: data.username, loggedIn: true });
+            } else {
+                somethingWrong = true;
+            }
+        } catch (error) {
             somethingWrong = true;
         }
 

@@ -18,13 +18,18 @@
 
 	async function loginTrigger(ev: any) {
 		const { username, password } = Object.fromEntries(new FormData(form));
-		const response = await login({ username, password });
+		try {
+			const response = await login({ username, password });
 
-		if (isOk(response)) {
-			const data = response.data;
-			user.set({ email: data.email, username: data.username, loggedIn: true });
-		} else {
-			wrongPassword = true;
+			if (isOk(response)) {
+				console.log('Ok');
+				const data = response.data;
+				user.set({ email: data.email, username: data.username, loggedIn: true });
+			} else {
+		        wrongPassword = true;
+            }
+		} catch (error) {
+		    wrongPassword = true;
 		}
 	}
 </script>
