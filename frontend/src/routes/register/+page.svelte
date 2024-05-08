@@ -17,6 +17,7 @@
     $: if ($user?.loggedIn === true) {
         goto('/');
     }
+    
     async function registerTrigger() {
         const { email, username, password, password1 } = Object.fromEntries(new FormData(form));
         if (password !== password1) {
