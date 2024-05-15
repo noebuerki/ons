@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { login } from '$lib/login-controls';
+	import { login } from '$lib/login-api';
 	import { A, Button, Card, Helper, Input, Label, P } from 'flowbite-svelte';
 	import type { User } from '../../models/user';
 	import { getContext } from 'svelte';

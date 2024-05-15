@@ -1,6 +1,6 @@
 <script lang="ts">
     import Header from "$lib/components/Header.svelte";
-	import { getCurrentUser } from "$lib/login-controls";
+	import { getCurrentUser } from "$lib/login-api";
 	import { writable } from "svelte/store";
     import "../app.pcss";
 	import { onMount, setContext } from "svelte";

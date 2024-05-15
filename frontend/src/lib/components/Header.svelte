@@ -1,8 +1,13 @@
 <script lang="ts">
     import { DarkMode, NavBrand, NavHamburger, NavLi, NavUl, Navbar } from "flowbite-svelte";
     import logo from '$lib/assets/logo.svg?raw';
+	import { getContext } from "svelte";
+	import type { User } from "../../models/user";
+	import type { Writable } from "svelte/store";
+
+    const user: Writable<User> = getContext('user');
 </script>
-<Navbar let:NavContainer color="primary">
+<Navbar let:NavContainer color="primary" >
     <NavContainer class="border px-5 py-2 rounded-lg bg-white dark:bg-gray-600">
         <NavBrand href="/">
             {#if logo}
@@ -15,10 +20,12 @@
         <div class="flex">
             <DarkMode class="my-auto" />
             <NavHamburger />
-            <NavUl>
-                <NavLi cla href="/">Dashboard</NavLi>
-                <NavLi href="/logout">Logout</NavLi>
-            </NavUl>
+            {#if $user && $user.loggedIn}
+                <NavUl>
+                    <NavLi href="/dashboard">Dashboard</NavLi>
+                    <NavLi href="/logout">Logout</NavLi>
+                </NavUl>
+            {/if}
         </div>
     </NavContainer>
 </Navbar>

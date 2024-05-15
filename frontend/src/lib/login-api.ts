@@ -1,7 +1,6 @@
 import { axios } from "$lib";
 import type { AxiosResponse } from "axios";
 import type { User } from "../models/user";
-import { getCsrfToken } from "./util";
 
 export async function getCurrentUser(): Promise<User> {
 
