@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "django_rest_passwordreset",
     "backend.api",
-    "backend.api.apps.ApiConfig",
 ]
 
 MIDDLEWARE = [
@@ -59,7 +58,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "urls"
+ROOT_URLCONF = "backend.urls"
 
 TEMPLATES = [
     {
@@ -152,7 +151,7 @@ STATIC_ROOT = BASE_DIR / "static"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_USER_MODEL = "backend.api.User"
+AUTH_USER_MODEL = "api.User"
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 

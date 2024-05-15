@@ -12,7 +12,7 @@ ENV PYTHONUNBUFFERED 1
 RUN apt-get update && apt-get install -y netcat
 
 # Copy entire project
-COPY ./backend ./
+COPY ./backend ./backend
 COPY ./manage.py ./
 
 # Install pip
