@@ -76,3 +76,8 @@ class RegisterView(viewsets.GenericViewSet, mixins.CreateModelMixin):
     queryset = models.User.objects.all()
     permission_classes = [AllowAny]
     serializer_class = serializers.RegisterSerializer
+
+    def create(self, request, *args, **kwargs):
+        super().create(request, *args)
+        user = self.get_object()
+        return Response({"username": user.username}, status=status.HTTP_201_CREATED)
