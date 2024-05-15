@@ -6,4 +6,4 @@ class ApiConfig(AppConfig):
     name = "backend.api"
 
     def ready(self):
-        pass
+        import backend.api.signals
