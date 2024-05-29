@@ -27,7 +27,7 @@ jobs:
         with:
           push: true
           context: .
-          dockerfile: backend/Dockerfile
+          file: backend/Dockerfile
           tags: noebuerki/ons-backend:latest
 
       - name: Trigger Stack redeploy
