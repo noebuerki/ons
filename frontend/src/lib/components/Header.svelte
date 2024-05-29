@@ -20,12 +20,16 @@
         <div class="flex">
             <DarkMode class="my-auto" />
             <NavHamburger />
-            {#if $user && $user.loggedIn}
-                <NavUl>
-                    <NavLi href="/dashboard">Dashboard</NavLi>
+            <NavUl>
+                {#if $user && $user.loggedIn}
+                    <NavLi href="/">Dashboard</NavLi>
                     <NavLi href="/logout">Logout</NavLi>
-                </NavUl>
-            {/if}
+                {:else if $user && !$user.loggedIn}
+                    <NavLi href="/login">Login</NavLi>
+                    <NavLi href="/register">Register</NavLi>
+                    <NavLi href="/forgot-password">Forgot Password</NavLi>
+                {/if}
+            </NavUl>
         </div>
     </NavContainer>
 </Navbar>

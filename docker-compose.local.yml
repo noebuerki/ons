@@ -28,6 +28,8 @@ services:
       - 8000:8000
     volumes:
       - ./backend:/app/backend
+    env_file:
+      - ./.env
   frontend:
     build:
       context: frontend
@@ -40,4 +42,4 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./frontend/build:/app/serve-folder
+      - ./frontend/build:/app/frontend
