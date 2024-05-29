@@ -26,6 +26,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
+          context: .
           dockerfile: backend/Dockerfile
           tags: noebuerki/ons-backend:latest
 
