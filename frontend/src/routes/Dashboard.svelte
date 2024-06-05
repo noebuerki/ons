@@ -1,8 +1,8 @@
 <script lang="ts">
 	import NameList from "$lib/components/NameList.svelte";
+	import AddName from "$lib/components/AddName.svelte";
 	import { Gender } from "../models/gender";
 	import { Modal, Button} from "flowbite-svelte";
-	import AddName from "../lib/components/AddName.svelte";
 	import type { Name } from "../models/name";
 	import { createName, deleteName } from "$lib/name-api";
 

@@ -9,9 +9,9 @@ export async function getCurrentUser(): Promise<User> {
 
         const user = response.data;
 
-        return { email: user.email, username: user.username, loggedIn: true };
+        return { id: user.id, email: user.email, username: user.username, loggedIn: true };
     } catch (error) {
-        return { email: null, username: null, loggedIn: false };
+        return { id: null, email: null, username: null, loggedIn: false };
     }
 }
 
@@ -31,7 +31,10 @@ export function register(user: object): Promise<AxiosResponse> {
     });
 }
 
-
 export async function logout(): Promise<void> {
     await axios.post('/logout/');
+}
+
+export async function deleteAccount(userId: number): Promise<void> {
+    await axios.delete(`/users/${userId}`);
 }
