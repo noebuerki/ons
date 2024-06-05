@@ -1,21 +1,25 @@
 # ons
 Online Name Server
 
-# Softwarearchitektur
+## Softwarearchitektur
 
-# Sicherheitsrelevante Aspekte/Vektoren
+## Libraries
 
-# UI-Design
+## Logging
+
+## UI-Design
 
 @Lars
 
-# Persistenz & Handhabung Credentials
+## Einsatzfähigkeit (Account Erstellung/Löschung, Login,/Logout, etc)
 
-# Umsetzung und Handhabung Session
+## Persistenz & Handhabung Credentials
 
-# Einsatzfähigkeit (Account Erstellung/Löschung, Login,/Logout, etc)
+## Umsetzung & Handhabung Session
 
-# Injektion
+## Sicherheitsrelevante Aspekte/Vektoren
+
+## Injektion
 
 Beispiel @Lars
 
@@ -42,7 +46,3 @@ Dadurch ist die Datenbank nicht öffentlich zugänglich und alle Zugriffe erfolg
 Alle Zugriffe auf unsere Docker-Container laufen über einen Reverse-Proxy. Dadurch kann das Https-Handling ausserhalb der Container geschehen.
 Auch können die diversen Vorteile wie Caching von Nginx genutzt werden.
 Dieser Proxy leitet automatisch alle Aufrufe auf den Pfad ```/api/*``` an den Backend Container. Alle anderen Zugriffe werden an den Frontend-Container weitergeleitet.
-
-# Libraries
-
-# Logging
