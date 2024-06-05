@@ -9,6 +9,10 @@ services:
       POSTGRES_DATABASE: "ons"
       POSTGRES_USER: "ons"
       POSTGRES_PASSWORD: "fqdeZRkKRLhWpcLB9y9D"
+    volumes:
+      - type: bind
+        target: /var/lib/postgres/data
+        source: /mnt/cache/appdata/ons/postgres
     networks:
       ons:
         ipv4_address: 10.10.13.10
