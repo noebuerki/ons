@@ -13,3 +13,7 @@ export async function createName(name: Partial<Name>): Promise<AxiosResponse> {
 export async function deleteName(id: number): Promise<AxiosResponse<Name>> {    
     return axios.delete(`/names/${id}`);
 }
+
+export async function updateName(id: number, name: Partial<Name>): Promise<AxiosResponse<Name>> {    
+    return axios.put(`/names/${id}`, name);
+}
