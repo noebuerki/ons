@@ -70,6 +70,9 @@
 				</div>
 			</div>
 			<Button type="submit" class="w-full">Register</Button>
+			{#if somethingWrong}
+				<P class="text-red-500">Something went wrong</P>
+			{/if}
 		</form>
 		<P class="mt-6 text-center">
 			Already have a account? <A href="/login">Login</A>
