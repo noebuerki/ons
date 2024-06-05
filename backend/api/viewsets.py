@@ -1,4 +1,4 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.contrib.auth import logout
 from django.contrib.auth import update_session_auth_hash
 from rest_framework import mixins
@@ -78,6 +78,8 @@ class RegisterView(viewsets.GenericViewSet, mixins.CreateModelMixin):
     serializer_class = serializers.RegisterSerializer
 
     def create(self, request, *args, **kwargs):
-        super().create(request, *args)
-        user = self.get_object()
-        return Response({"username": user.username}, status=status.HTTP_201_CREATED)
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        user = serializer.instance
+        return Response(serializers.UserSerializer(user).data, status=status.HTTP_201_CREATED)
