@@ -27,7 +27,7 @@
                 {:else if $user && !$user.loggedIn}
                     <NavLi href="/login">Login</NavLi>
                     <NavLi href="/register">Register</NavLi>
-                    <NavLi href="/forgot-password">Forgot Password</NavLi>
+                    <NavLi href="/delete-account">Delete account</NavLi>
                 {/if}
             </NavUl>
         </div>
