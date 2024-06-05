@@ -1,4 +1,4 @@
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.contrib.auth import update_session_auth_hash
 from rest_framework import mixins
@@ -63,7 +63,9 @@ class LoginView(views.APIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data["user"]
         login(request, user)
-        return Response(serializers.UserSerializer(user).data, status=status.HTTP_200_OK)
+        return Response(
+            serializers.UserSerializer(user).data, status=status.HTTP_200_OK
+        )
 
 
 class LogoutView(views.APIView):
@@ -82,4 +84,7 @@ class RegisterView(viewsets.GenericViewSet, mixins.CreateModelMixin):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         user = serializer.instance
-        return Response(serializers.UserSerializer(user).data, status=status.HTTP_201_CREATED)
+        return Response(
+            serializers.UserSerializer(user).data,
+            status=status.HTTP_201_CREATED,
+        )
