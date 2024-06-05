@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { register } from '$lib/login-api';
-	import { A, Button, Card, Input, Label, P } from 'flowbite-svelte';
+	import { A, Button, Card, Helper, Input, Label, P } from 'flowbite-svelte';
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 	import type { User } from '../../models/user';
@@ -11,6 +11,7 @@
     let form: HTMLFormElement;
 
     let somethingWrong = false;
+	let errorMessage: any;
 
     const user: Writable<User> = getContext('user');
 
@@ -28,11 +29,12 @@
         }
         try {
             const res = await register({ email, username, password });
+			const data = res.data;
             
             if (isOk(res)) {
-                const data = res.data;
                 user.set({ id: data.id, email: data.email, username: data.username, loggedIn: true });
             } else {
+				errorMessage = data;
                 somethingWrong = true;
             }
         } catch (error) {
@@ -68,11 +70,17 @@
 						<P class="text-red-500">Passwords don't match</P>
 					{/if}
 				</div>
+				{#if somethingWrong}
+					<Helper class='mt-2' color='red'>
+						<span class="font-medium">Something went wrong!</span>
+						{#if errorMessage}							
+							{JSON.stringify(errorMessage)}
+						{/if}
+					</Helper>
+			{/if}
+
 			</div>
 			<Button type="submit" class="w-full">Register</Button>
-			{#if somethingWrong}
-				<P class="text-red-500">Something went wrong</P>
-			{/if}
 		</form>
 		<P class="mt-6 text-center">
 			Already have a account? <A href="/login">Login</A>
