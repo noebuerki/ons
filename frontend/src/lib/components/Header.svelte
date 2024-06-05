@@ -24,10 +24,10 @@
                 {#if $user && $user.loggedIn}
                     <NavLi href="/">Dashboard</NavLi>
                     <NavLi href="/logout">Logout</NavLi>
+                    <NavLi href="/delete-account">Delete account</NavLi>
                 {:else if $user && !$user.loggedIn}
                     <NavLi href="/login">Login</NavLi>
                     <NavLi href="/register">Register</NavLi>
-                    <NavLi href="/delete-account">Delete account</NavLi>
                 {/if}
             </NavUl>
         </div>
