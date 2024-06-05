@@ -5,17 +5,28 @@ Online Name Server
 
 ## Libraries
 
+@Lars
+@Joel
+
 ## Logging
+
+@Joel
 
 ## UI-Design
 
 @Lars
 
-## Einsatzfähigkeit (Account Erstellung/Löschung, Login,/Logout, etc)
+## Einsatzfähigkeit
+
+(Account Erstellung/Löschung, Login,/Logout, etc)
 
 ## Persistenz & Handhabung Credentials
 
+@Noé
+
 ## Umsetzung & Handhabung Session
+
+@Joel
 
 ## Sicherheitsrelevante Aspekte/Vektoren
 
