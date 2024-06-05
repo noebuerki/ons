@@ -23,7 +23,7 @@
 
 			if (isOk(response)) {
 				const data = response.data;
-				user.set({ email: data.email, username: data.username, loggedIn: true });
+				user.set({ id: data.id, email: data.email, username: data.username, loggedIn: true });
 			} else {
 		        wrongPassword = true;
             }

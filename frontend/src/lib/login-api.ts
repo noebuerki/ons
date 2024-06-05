@@ -31,7 +31,6 @@ export function register(user: object): Promise<AxiosResponse> {
     });
 }
 
-
 export async function logout(): Promise<void> {
     await axios.post('/logout/');
 }

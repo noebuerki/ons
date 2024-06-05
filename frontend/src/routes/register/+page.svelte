@@ -31,7 +31,7 @@
             
             if (isOk(res)) {
                 const data = res.data;
-                user.set({ email: data.email, username: data.username, loggedIn: true });
+                user.set({ id: data.id, email: data.email, username: data.username, loggedIn: true });
             } else {
                 somethingWrong = true;
             }
