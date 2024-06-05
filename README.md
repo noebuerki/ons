@@ -1,13 +1,28 @@
 # ons
 Online Name Server
 
-## Getting started
-Run `docker-compose -f docker-compose.local.yml up`
+# Softwarearchitektur
 
-To develop in frontend with the docker
-```bash
-cd frontend
-nvm use
-npm install
-npm run watch
-```
+# Sicherheitsrelevante Aspekte/Vektoren
+
+# UI-Design
+
+@Lars
+
+# Persistenz & Handhabung Credentials
+
+# Umsetzung und Handhabung Session
+
+# Einsatzfähigkeit (Account Erstellung/Löschung, Login,/Logout, etc)
+
+# Injektion
+
+Beispiel @Lars
+
+# Deployments
+
+@Noé
+
+# Libraries
+
+# Logging
