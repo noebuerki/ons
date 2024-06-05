@@ -19,7 +19,7 @@ services:
     image: noebuerki/ons-backend:latest
     container_name: "ons-backend"
     environment:
-      DJANGO_ALLOWED_HOSTS: https://ons.noebuerki-services.ch,localhost
+      DJANGO_ALLOWED_HOSTS: ons.noebuerki-services.ch,localhost
       CSRF_TRUSTED_ORIGINS: https://ons.noebuerki-services.ch
     ports:
       - "8041:8000"
