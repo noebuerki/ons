@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getContext } from "svelte";
+	import { getContext, onMount } from "svelte";
 	import type { Writable } from "svelte/store";
 	import type { User } from "../../models/user";
 	import { goto } from "$app/navigation";
@@ -7,11 +7,13 @@
 
     const user: Writable<User> = getContext('user');
         
-    $: if ($user.id != null) {
-        deleteAccount($user.id)
-            .then(() => {
-                user.set({ id: null, email: null, username: null, loggedIn: false})
-                goto('/');
-            })
-    }
+    onMount(async() => {
+        if ($user.id) {
+            deleteAccount($user.id)
+                .then(() => {
+                    user.set({ id: null, email: null, username: null, loggedIn: false})
+                    goto('/');
+                });
+        }
+    });
 </script>
