@@ -31,7 +31,7 @@ jobs:
 
       - name: Trigger Stack redeploy
         run: |
-          curl --location --request PUT -k 'https://portainer.noebuerki-services.ch/api/stacks/15/git/redeploy?endpointId=2' --header 'Content-Type: application/json' --header 'X-API-Key: ${{ secrets.PORTAINER_API_TOKEN }}' --data '{
+          curl --location --request PUT -k 'https://portainer.noebuerki-services.ch/api/stacks/1/git/redeploy?endpointId=2' --header 'Content-Type: application/json' --header 'X-API-Key: ${{ secrets.PORTAINER_API_TOKEN }}' --data '{
             "PullImage": true,
             "RepositoryAuthentication": true,
             "RepositoryReferenceName": "refs/heads/main"
