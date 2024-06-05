@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { register } from '$lib/login-api';
+	import { login, register } from '$lib/login-api';
 	import { A, Button, Card, Helper, Input, Label, P } from 'flowbite-svelte';
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
@@ -32,6 +32,7 @@
 			const data = res.data;
             
             if (isOk(res)) {
+				await login({username, password});
                 user.set({ id: data.id, email: data.email, username: data.username, loggedIn: true });
             } else {
 				errorMessage = data;
