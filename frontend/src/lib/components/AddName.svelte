@@ -14,12 +14,13 @@
 
     function submit() {
         const params = Object.fromEntries(new FormData(form)) as any;
-        dispatch('submit', params);
 
         if (names.includes(params.name)) {
             isValidName = false;
             return;
         }
+		
+        dispatch('submit', params);
     }
 
 </script>
