@@ -1,0 +1,43 @@
+version: '3.3'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: "ons-db"
+    environment:
+      POSTGRES_ROOT_PASSWORD: "UKFZoaJh!Pddx9TP.UUV"
+      POSTGRES_DATABASE: "ons"
+      POSTGRES_USER: "ons"
+      POSTGRES_PASSWORD: "fqdeZRkKRLhWpcLB9y9D"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ons" ]
+      start_period: 4s
+  backend:
+    build:
+      context: .
+      dockerfile: ./backend/Dockerfile
+    container_name: "ons-backend"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_HOST: "db"
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backend:/app/backend
+    env_file:
+      - ./.env
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    container_name: "ons-frontend"
+    environment:
+      BACKEND_HOST: "backend:8000"
+    depends_on:
+      - backend
+    ports:
+      - 80:80
