@@ -1,13 +1,39 @@
 # ons
 Online Name Server
 
+## Setup
+
+1. GitHub-Projekt clonen:
+
+`git clone git@github.com:noebuerki/ons.git`
+
+2. App lokal starten 
+
+`docker compose -f docker-compose.local.yml up`
+
 ## Softwarearchitektur
 
 ## Libraries
 
+Wir verwenden in unserem Projekt diverse Libraries im Frontend und Backend, damit wir nicht alles selber machen müssen.
+
 ### Backend
 
-@Joel
+Folgende Packages wurden mit pip für das Python-Backend installiert:
+
+| Package                   | Version | Beschreibung                                                                                        |
+|---------------------------|---------|-----------------------------------------------------------------------------------------------------|
+| daphne                    | 3.0.2   | HTTP-Protokollserver für asgi, um die Django-App laufen zu lassen                                   |
+| django                    | 4.2.11  | Webframework mit MVP-Schema                                                                         |
+| django-cors-headers       | 4.3.1   | Unterstützt die Handhabung der CORS-Headers, damit das Frontend requests an das Backend machen kann |
+| django-extensions         | 3.1.5   | Sammlung von Django-Erweiterungen, unter anderem Commands und im Adminbereich                       |
+| django-rest-passwordreset | 1.4.1   | Generierung von Tokens für das Zurücksetzten von Passwörtern                                        |
+| djangorestframework       | 3.14.0  | Ermöglicht Django als REST API zu verwenden                                                         |
+| drf-nested-routers        | 0.93.5  | Fügt den Support von verschachtelten Routers hinzu                                                  |
+| isort                     | 5.13.2  | Linting-Tool für Python Imports                                                                     |
+| psycopg2-binary           | 2.9.9   | PostgreSQL Datenbankadapter für Django                                                              |
+| pytest                    | 8.1.0   | Testframework für automatische Softwaretests                                                        |
+| ruff                      | 0.3.0   | Linting-Tool für Python-Code                                                                        |                      
 
 ### Frontend
 
@@ -15,9 +41,25 @@ Online Name Server
 
 ## Logging
 
-Django bietet bereits ein umfangreiches Logging, welches alle nützlichen Informationen liefert um Fehler zu debuggen. Das Logging kann jederzeit ergänzt werden.
+Django bietet bereits ein umfangreiches Logging, welches alle nützlichen Informationen liefert um Fehler zu debuggen.
 
 ![logging.png](assetts/logging.png)
+
+Das Logging kann jederzeit ergänzt werden:
+
+```
+import logging
+
+import logging
+logger = logging.getLogger(__name__)
+logging.basicConfig(filename='example.log', encoding='utf-8', level=logging.DEBUG)
+logger.debug('This message should go to the log file')
+logger.info('So should this')
+logger.warning('And this, too')
+logger.error('And non-ASCII stuff, too, like Øresund and Malmö')
+```
+
+Codeausschnitt von [docs.python.org](https://docs.python.org/3/howto/logging.html#logging-to-a-file)
 
 ## UI-Design
 
@@ -25,7 +67,23 @@ Django bietet bereits ein umfangreiches Logging, welches alle nützlichen Inform
 
 ## Einsatzfähigkeit
 
+Die REST API stellt für jede Aktion einen Endpoint zur Verfügung. Dabei kann auf jedem Detail-Endpoint REST-üblich ein GET, POST, PATCH, PUT und DELETE-Request gemacht werden.
+
+```
+/api/login/     backend.api.viewsets.view    
+/api/logout/    backend.api.viewsets.view       
+/api/names      backend.api.viewsets.NameViewSet        names-list
+/api/names/<pk> backend.api.viewsets.NameViewSet        names-detail
+/api/register   backend.api.viewsets.RegisterView       register-list
+/api/users      backend.api.viewsets.UserViewSet        users-list
+/api/users/<pk> backend.api.viewsets.UserViewSet        users-detail
+/api/users/me   backend.api.viewsets.UserViewSet        users-me
+```
+
 (Account Erstellung/Löschung, Login,/Logout, etc)
+
+@Lars 
+Screenshots?
 
 ## Persistenz & Handhabung Credentials
 
