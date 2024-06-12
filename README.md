@@ -43,7 +43,7 @@ Folgende Packages wurden mit pip für das Python-Backend installiert:
 
 Django bietet bereits ein umfangreiches Logging, welches alle nützlichen Informationen liefert um Fehler zu debuggen.
 
-![logging.png](assetts/logging.png)
+![logging.png](assets/logging.png)
 
 Das Logging kann jederzeit ergänzt werden:
 
