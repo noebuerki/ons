@@ -67,6 +67,8 @@ Codeausschnitt von [docs.python.org](https://docs.python.org/3/howto/logging.htm
 
 ## Einsatzfähigkeit
 
+### Backend
+
 Die REST API stellt für jede Aktion einen Endpoint zur Verfügung. Dabei kann auf jedem Detail-Endpoint REST-üblich ein GET, POST, PATCH, PUT und DELETE-Request gemacht werden.
 
 ```
@@ -79,6 +81,8 @@ Die REST API stellt für jede Aktion einen Endpoint zur Verfügung. Dabei kann a
 /api/users/<pk> backend.api.viewsets.UserViewSet        users-detail
 /api/users/me   backend.api.viewsets.UserViewSet        users-me
 ```
+
+### Frontend
 
 (Account Erstellung/Löschung, Login,/Logout, etc)
 
