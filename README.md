@@ -104,7 +104,11 @@ Screenshots?
 
 ## Persistenz & Handhabung Credentials
 
-@Noé
+Die Persistenz der Applikation wird durch ein Docker-Binding gewährleistet. 
+Dadurch werden die Daten der Datenbank ausserhalb des Containers gespeichert, wodurch diese beim Redeployment nicht verloren gehen.
+
+Der Zugriff auf die Datenbank geschieht in einem geschützten und privaten Docker-Netzwerk. Dadurch muss der Zugang nicht zusätzlich geschützt werden.
+Trotzdem wird ein User samt Passwort zur Authentifizierung genutzt.
 
 ## Umsetzung & Handhabung Session
 
