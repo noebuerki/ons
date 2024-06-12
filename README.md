@@ -13,11 +13,27 @@ Online Name Server
 
 ## Softwarearchitektur
 
-## Libraries
+### Libraries
 
 Wir verwenden in unserem Projekt diverse Libraries im Frontend und Backend, damit wir nicht alles selber machen müssen.
 
-### Backend
+#### Frontend
+
+Folgende Packages wurden mit npm für das JavaScript-Frontend installiert:
+
+| Package                   | Version | Beschreibung                                                                                        |
+|---------------------------|---------|----------------|
+| svelte                    | 4.2.7   | Das genutzte Komponenten-Framework. |
+| @sveltejs/kit             | 2.0.0   | Das Meta-Framework für svelte, welches die Applikation mit Routing erweitert. |
+| @sveltejs/adapter-static  | 3.0.1   | Der Adapter der dafür sorgt, dass von vite statisches HTML/CSS/JS gebildet wird. Und bietet somit eine Alternative zu SSR. |
+| vite                      | 5.0.3   | Buildet die Applikation zu einem Bundle für den Browser |
+| axios                     | 1.6.8   | Vereinfacht einheitliche Requests an das Backend. Setzt beispielsweise den CSRF in den Header. |
+| flowbite                  | 2.3.0   | Eine Javascript-UI-Komponentenbibliothek. |
+| flowbite-svelte           | 0.46.1  | Eine Library für die direkte Integration von flowbite zu svelte-Komponenten. |
+| tailwindcss               | 3.3.6   | Ein umfangreiches CSS-Framework, welches von flowbite verwendet wird. |
+| typescript                | 5.0.0   |  |
+
+#### Backend
 
 Folgende Packages wurden mit pip für das Python-Backend installiert:
 
@@ -35,11 +51,7 @@ Folgende Packages wurden mit pip für das Python-Backend installiert:
 | pytest                    | 8.1.0   | Testframework für automatische Softwaretests                                                        |
 | ruff                      | 0.3.0   | Linting-Tool für Python-Code                                                                        |                      
 
-### Frontend
-
-@Lars
-
-## Logging
+### Logging
 
 Django bietet bereits ein umfangreiches Logging, welches alle nützlichen Informationen liefert um Fehler zu debuggen.
 
@@ -89,11 +101,9 @@ Die REST API stellt für jede Aktion einen Endpoint zur Verfügung. Dabei kann a
 @Lars 
 Screenshots?
 
-## Persistenz & Handhabung Credentials
+## Authentifikation
 
-@Noé
-
-## Umsetzung & Handhabung Session
+### Umsetzung & Handhabung Session
 
 Die Session-ID wird in den Cookies abgespeichert.
 
@@ -157,8 +167,6 @@ def logout(request):
         request.user = AnonymousUser()
 ```
 
-## Sicherheitsrelevante Aspekte/Vektoren
-
 ## Injektion
 
 Beispiel @Lars
@@ -180,6 +188,10 @@ Unser Projekt wird in 3 separaten Docker-Containern betrieben
 
 Damit das Backend geschützt mit der Datenbank kommunizieren kann, werden diese Container mit einem Docker-Netzwerk verbunden.
 Dadurch ist die Datenbank nicht öffentlich zugänglich und alle Zugriffe erfolgen durch das Backend (Stichwort Security).
+
+### Persistenz
+
+Alle Daten der Datenbank werden per Docker-Binding auf dem Host abgelegt. Dadurch gehen diese beim Redeployment nicht verloren.
 
 ### Reverse Proxy
 

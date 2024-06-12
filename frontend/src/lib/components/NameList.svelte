@@ -2,6 +2,7 @@
     import { Li, List, P, Hr, Heading, Card, SpeedDial, Listgroup, ListgroupItem, Button } from "flowbite-svelte";
 	import { createEventDispatcher } from "svelte";
 	import type { Name } from "../../models/name";
+    import moreIcon from '$lib/assets/more.svg';
 
     export let title = 'Name List';
     export let list: Array<Name> = [];
@@ -27,7 +28,9 @@
                     <div class="flex place-content-between items-center py-1 px-2">
                         <P>{item.name}</P>
                         <SpeedDial defaultClass="" tooltip="none" placement="top-end">
-                            <Button pill={true} size="sm">more</Button>
+                            <Button slot="button" class="!p-2" pill={true}>
+                                <img src={moreIcon}  class="w-6 h-6" alt="More icon"/>  
+                            </Button>
                             <Listgroup class="divide-none" active>
                                 <ListgroupItem class="flex gap-2 md:px-5" on:click={() => remove(item)}>
                                     Delete
