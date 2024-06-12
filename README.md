@@ -1,4 +1,5 @@
 # ons
+
 Online Name Server
 
 ## Setup
@@ -7,7 +8,7 @@ Online Name Server
 
 `git clone git@github.com:noebuerki/ons.git`
 
-2. App lokal starten 
+2. App lokal starten
 
 `docker compose -f docker-compose.local.yml up`
 
@@ -38,7 +39,7 @@ Folgende Packages wurden mit npm für das JavaScript-Frontend installiert:
 Folgende Packages wurden mit pip für das Python-Backend installiert:
 
 | Package                   | Version | Beschreibung                                                                                        |
-|---------------------------|---------|-----------------------------------------------------------------------------------------------------|
+| ------------------------- | ------- | --------------------------------------------------------------------------------------------------- |
 | daphne                    | 3.0.2   | HTTP-Protokollserver für asgi, um die Django-App laufen zu lassen                                   |
 | django                    | 4.2.11  | Webframework mit MVP-Schema                                                                         |
 | django-cors-headers       | 4.3.1   | Unterstützt die Handhabung der CORS-Headers, damit das Frontend requests an das Backend machen kann |
@@ -49,7 +50,23 @@ Folgende Packages wurden mit pip für das Python-Backend installiert:
 | isort                     | 5.13.2  | Linting-Tool für Python Imports                                                                     |
 | psycopg2-binary           | 2.9.9   | PostgreSQL Datenbankadapter für Django                                                              |
 | pytest                    | 8.1.0   | Testframework für automatische Softwaretests                                                        |
-| ruff                      | 0.3.0   | Linting-Tool für Python-Code                                                                        |                      
+| ruff                      | 0.3.0   | Linting-Tool für Python-Code                                                                        |
+
+### Frontend
+
+Folgende Packages wurden mit npm für das JavaScript-Frontend installiert:
+
+| Package                  | Version | Beschreibung                                                                                                               |
+| ------------------------ | ------- | -------------------------------------------------------------------------------------------------------------------------- |
+| svelte                   | 4.2.7   | Das genutzte Komponenten-Framework.                                                                                        |
+| @sveltejs/kit            | 2.0.0   | Das Meta-Framework für svelte, welches die Applikation mit Routing erweitert.                                              |
+| @sveltejs/adapter-static | 3.0.1   | Der Adapter der dafür sorgt, dass von vite statisches HTML/CSS/JS gebildet wird. Und bietet somit eine Alternative zu SSR. |
+| vite                     | 5.0.3   | Buildet die Applikation zu einem Bundle für den Browser                                                                    |
+| axios                    | 1.6.8   | Vereinfacht einheitliche Requests an das Backend. Setzt beispielsweise den CSRF in den Header.                             |
+| flowbite                 | 2.3.0   | Eine Javascript-UI-Komponentenbibliothek.                                                                                  |
+| flowbite-svelte          | 0.46.1  | Eine Library für die direkte Integration von flowbite zu svelte-Komponenten.                                               |
+| tailwindcss              | 3.3.6   | Ein umfangreiches CSS-Framework, welches von flowbite verwendet wird.                                                      |
+| typescript               | 5.0.0   | Erweitert JavaScript mit Typen.                                                                                            |
 
 ### Logging
 
@@ -59,7 +76,7 @@ Django bietet bereits ein umfangreiches Logging, welches alle nützlichen Inform
 
 Das Logging kann jederzeit ergänzt werden:
 
-```
+```python
 import logging
 
 import logging
@@ -75,7 +92,24 @@ Codeausschnitt von [docs.python.org](https://docs.python.org/3/howto/logging.htm
 
 ## UI-Design
 
-@Lars
+Im Design wurde auf die [flowbite](https://flowbite.com/)-Library gesetzt. Im Farbschema haben wir uns für eine eigene Palette entschieden. Dazu haben wir die tailwind.config.cjs-Datei mit folgendem erweitert:
+```javascript
+{
+    primary: {
+        50: '#F8F2FF',
+        100: '#F4EEFF',
+        200: '#E6DEFF',
+        300: '#D7CCFF',
+        400: '#C3ADFF',
+        500: '#7D5CFF',
+        600: '#572FFF',
+        700: '#4F27EB',
+        800: '#4522CC',
+        900: '#371BA5'
+    }
+}
+```
+Die `primary`-Farbe wird von flowbite für seine Komponenten verwendet. Diese gibt der Applikation einen violettes Aussehen.
 
 ## Einsatzfähigkeit
 
@@ -84,8 +118,8 @@ Codeausschnitt von [docs.python.org](https://docs.python.org/3/howto/logging.htm
 Die REST API stellt für jede Aktion einen Endpoint zur Verfügung. Dabei kann auf jedem Detail-Endpoint REST-üblich ein GET, POST, PATCH, PUT und DELETE-Request gemacht werden.
 
 ```
-/api/login/     backend.api.viewsets.view    
-/api/logout/    backend.api.viewsets.view       
+/api/login/     backend.api.viewsets.view
+/api/logout/    backend.api.viewsets.view
 /api/names      backend.api.viewsets.NameViewSet        names-list
 /api/names/<pk> backend.api.viewsets.NameViewSet        names-detail
 /api/register   backend.api.viewsets.RegisterView       register-list
@@ -98,7 +132,7 @@ Die REST API stellt für jede Aktion einen Endpoint zur Verfügung. Dabei kann a
 
 (Account Erstellung/Löschung, Login,/Logout, etc)
 
-@Lars 
+@Lars
 Screenshots?
 
 ## Authentifikation
@@ -112,7 +146,8 @@ Die Session-ID wird in den Cookies abgespeichert.
 Beim Login wird mit der Funktion `login` von Django eine Session-ID erstellt (`request.session.cycle_key()`), die anschliessend auf dem Client in den Cookies abgespeichert wird.
 
 Ausschnitt aus `django.contrib.auth.login`:
-```
+
+```python
 def login(request, user, backend=None):
     """
     Persist a user id and a backend in the request. This way a user doesn't
@@ -148,7 +183,8 @@ def login(request, user, backend=None):
 Beim Logout wird mit der Funktion `logout` von Django die Session zerstört (`flush`).
 
 Funktion aus `django.contrib.auth.logout`:
-```
+
+```python
 def logout(request):
     """
     Remove the authenticated user's ID from the request and flush their session
@@ -169,7 +205,15 @@ def logout(request):
 
 ## Injektion
 
-Beispiel @Lars
+### XSS-Injection
+Die XSS-Injection wird von Svelte verhindert. Der Template-Code wird automatisch escapt. Beispiel:
+```svelte
+<p>{escapeString}</p>
+```
+Die Entscheidung, dass ein String aktive nicht escapt wird kann mit einem `@html` gemacht werden.
+```svelte
+<p>{@html dontEscapeString}</p>
+```
 
 ## Deployment
 
@@ -197,4 +241,4 @@ Alle Daten der Datenbank werden per Docker-Binding auf dem Host abgelegt. Dadurc
 
 Alle Zugriffe auf unsere Docker-Container laufen über einen Reverse-Proxy. Dadurch kann das Https-Handling ausserhalb der Container geschehen.
 Auch können die diversen Vorteile wie Caching von Nginx genutzt werden.
-Dieser Proxy leitet automatisch alle Aufrufe auf den Pfad ```/api/*``` an den Backend Container. Alle anderen Zugriffe werden an den Frontend-Container weitergeleitet.
+Dieser Proxy leitet automatisch alle Aufrufe auf den Pfad `/api/*` an den Backend Container. Alle anderen Zugriffe werden an den Frontend-Container weitergeleitet.
