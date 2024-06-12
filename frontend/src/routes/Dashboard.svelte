@@ -48,7 +48,7 @@
             if (!currentEditName) {
                 return;
             }
-            
+
             await updateName(currentEditName.id, name);
             if (name.name) currentEditName.name = name.name;
             if (name.gender) currentEditName.gender = name.gender;
@@ -58,6 +58,11 @@
             alert('Failed to update name');
         }
 
+        currentEditName = null;
+    }
+
+    function cancelEdit() {
+        editModalOpen = false;
         currentEditName = null;
     }
 </script>
@@ -96,7 +101,7 @@
     <AddName on:submit={addName} names={namelist.map(n => n.name)}></AddName>
 </Modal>
 <Modal bind:open={editModalOpen} title="Edit name">
-    <EditName on:submit={({detail}) => saveName(detail)} name={currentEditName} names={namelist.map(n => n.name)}></EditName>
+    <EditName on:submit={({detail}) => saveName(detail)} on:cancel={cancelEdit} name={currentEditName} names={namelist.map(n => n.name)}></EditName>
 </Modal>
 
 <Button class="absolute end-6 bottom-6 aspect-square" on:click={() => (modalOpen = true)} pill={true}>

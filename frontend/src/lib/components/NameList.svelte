@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Li, List, P, Hr, Heading, Card, SpeedDial, Listgroup, ListgroupItem } from "flowbite-svelte";
+    import { Li, List, P, Hr, Heading, Card, SpeedDial, Listgroup, ListgroupItem, Button } from "flowbite-svelte";
 	import { createEventDispatcher } from "svelte";
 	import type { Name } from "../../models/name";
 
@@ -26,7 +26,8 @@
                 <Card padding="none">
                     <div class="flex place-content-between items-center py-1 px-2">
                         <P>{item.name}</P>
-                        <SpeedDial tooltip="none" placement="top-end">
+                        <SpeedDial defaultClass="" tooltip="none" placement="top-end">
+                            <Button pill={true} size="sm">more</Button>
                             <Listgroup class="divide-none" active>
                                 <ListgroupItem class="flex gap-2 md:px-5" on:click={() => remove(item)}>
                                     Delete

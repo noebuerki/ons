@@ -25,5 +25,4 @@ RUN python -m pip install -r backend/requirements/requirements.txt
 EXPOSE 8000
 
 # Run entrypoint
-
 ENTRYPOINT [ "sh", "-c", "/app/backend/entrypoint.sh" ]
