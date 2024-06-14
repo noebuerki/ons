@@ -128,13 +128,6 @@ Die REST API stellt für jede Aktion einen Endpoint zur Verfügung. Dabei kann a
 /api/users/me   backend.api.viewsets.UserViewSet        users-me
 ```
 
-### Frontend
-
-(Account Erstellung/Löschung, Login,/Logout, etc)
-
-@Lars
-Screenshots?
-
 ## Authentifikation
 
 ### Umsetzung & Handhabung Session
