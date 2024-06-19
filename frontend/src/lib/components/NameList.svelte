@@ -2,7 +2,7 @@
     import { Li, List, P, Hr, Heading, Card, SpeedDial, Listgroup, ListgroupItem, Button } from "flowbite-svelte";
 	import { createEventDispatcher } from "svelte";
 	import type { Name } from "../../models/name";
-    import moreIcon from '$lib/assets/more.svg';
+    import moreIcon from '$lib/assets/more.svg?raw';
 
     export let title = 'Name List';
     export let list: Array<Name> = [];
@@ -29,7 +29,9 @@
                         <P>{item.name}</P>
                         <SpeedDial defaultClass="" tooltip="none" placement="top-end">
                             <Button slot="button" class="!p-2" pill={true}>
-                                <img src={moreIcon}  class="w-6 h-6" alt="More icon"/>  
+                                <div class="w-6 h-6 more-icon">
+                                    {@html moreIcon}
+                                </div>
                             </Button>
                             <Listgroup class="divide-none" active>
                                 <ListgroupItem class="flex gap-2 md:px-5" on:click={() => remove(item)}>
@@ -46,3 +48,9 @@
         {/each}
     </List>
 </Card>
+
+<style lang="postcss">
+    .more-icon :global(svg) {
+        @apply fill-current text-white;
+    }
+</style>
