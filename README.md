@@ -18,6 +18,22 @@ Online Name Server
 
 Wir verwenden in unserem Projekt diverse Libraries im Frontend und Backend, damit wir nicht alles selber machen müssen.
 
+#### Frontend
+
+Folgende Packages wurden mit npm für das JavaScript-Frontend installiert:
+
+| Package                  | Version | Beschreibung                                                                                                               |
+| ------------------------ | ------- | -------------------------------------------------------------------------------------------------------------------------- |
+| svelte                   | 4.2.7   | Das genutzte Komponenten-Framework.                                                                                        |
+| @sveltejs/kit            | 2.0.0   | Das Meta-Framework für svelte, welches die Applikation mit Routing erweitert.                                              |
+| @sveltejs/adapter-static | 3.0.1   | Der Adapter der dafür sorgt, dass von vite statisches HTML/CSS/JS gebildet wird. Und bietet somit eine Alternative zu SSR. |
+| vite                     | 5.0.3   | Buildet die Applikation zu einem Bundle für den Browser                                                                    |
+| axios                    | 1.6.8   | Vereinfacht einheitliche Requests an das Backend. Setzt beispielsweise den CSRF in den Header.                             |
+| flowbite                 | 2.3.0   | Eine Javascript-UI-Komponentenbibliothek.                                                                                  |
+| flowbite-svelte          | 0.46.1  | Eine Library für die direkte Integration von flowbite zu svelte-Komponenten.                                               |
+| tailwindcss              | 3.3.6   | Ein umfangreiches CSS-Framework, welches von flowbite verwendet wird.                                                      |
+| typescript               | 5.0.0   | Erweitert JavaScript mit Typen.                                                                                            |
+
 #### Backend
 
 Folgende Packages wurden mit pip für das Python-Backend installiert:
@@ -35,22 +51,6 @@ Folgende Packages wurden mit pip für das Python-Backend installiert:
 | psycopg2-binary           | 2.9.9   | PostgreSQL Datenbankadapter für Django                                                              |
 | pytest                    | 8.1.0   | Testframework für automatische Softwaretests                                                        |
 | ruff                      | 0.3.0   | Linting-Tool für Python-Code                                                                        |
-
-### Frontend
-
-Folgende Packages wurden mit npm für das JavaScript-Frontend installiert:
-
-| Package                  | Version | Beschreibung                                                                                                               |
-| ------------------------ | ------- | -------------------------------------------------------------------------------------------------------------------------- |
-| svelte                   | 4.2.7   | Das genutzte Komponenten-Framework.                                                                                        |
-| @sveltejs/kit            | 2.0.0   | Das Meta-Framework für svelte, welches die Applikation mit Routing erweitert.                                              |
-| @sveltejs/adapter-static | 3.0.1   | Der Adapter der dafür sorgt, dass von vite statisches HTML/CSS/JS gebildet wird. Und bietet somit eine Alternative zu SSR. |
-| vite                     | 5.0.3   | Buildet die Applikation zu einem Bundle für den Browser                                                                    |
-| axios                    | 1.6.8   | Vereinfacht einheitliche Requests an das Backend. Setzt beispielsweise den CSRF in den Header.                             |
-| flowbite                 | 2.3.0   | Eine Javascript-UI-Komponentenbibliothek.                                                                                  |
-| flowbite-svelte          | 0.46.1  | Eine Library für die direkte Integration von flowbite zu svelte-Komponenten.                                               |
-| tailwindcss              | 3.3.6   | Ein umfangreiches CSS-Framework, welches von flowbite verwendet wird.                                                      |
-| typescript               | 5.0.0   | Erweitert JavaScript mit Typen.                                                                                            |
  
 ### Logging
 
