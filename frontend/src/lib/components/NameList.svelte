@@ -29,7 +29,7 @@
                         <P>{item.name}</P>
                         <SpeedDial defaultClass="" tooltip="none" placement="top-end">
                             <Button slot="button" class="!p-2" pill={true}>
-                                <div class="w-6 h-6 more-icon">
+                                <div class="w-6 h-6">
                                     {@html moreIcon}
                                 </div>
                             </Button>
@@ -48,9 +48,3 @@
         {/each}
     </List>
 </Card>
-
-<style lang="postcss">
-    .more-icon :global(svg) {
-        @apply fill-current text-white;
-    }
-</style>
